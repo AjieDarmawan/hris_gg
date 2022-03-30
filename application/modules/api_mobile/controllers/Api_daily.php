@@ -353,6 +353,28 @@ class Api_daily extends CI_Controller
         echo json_encode($get_harian);
 	}
 
+	function list_activity(){
+
+		$id_kar = $this->input->post("id_kar");
+
+       
+        $kar = $this->db->query('select * from m_karyawan where id_karyawan ='.$id_kar)->row_array();
+
+
+        $nik_kantor = str_replace(".","",$kar['nik_kantor']);
+		$uniq = date('dmY');
+
+		  $nomor = $nik_kantor.$uniq;
+
+        
+		$get_harian = $this->Api_daily_M->get_harian($nomor);
+		
+        echo json_encode($get_harian);
+
+
+		
+	}
+
    
 
   

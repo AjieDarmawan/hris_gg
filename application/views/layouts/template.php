@@ -1762,7 +1762,7 @@
     <script src="<?php echo base_url(); ?>assets/template/assets/js/pages/crud/datatables/basic/scrollable.js"></script>
     <!--end::Page Scripts-->
 
-    <script src="<?php echo base_url(); ?>assets/template/assets/plugins/global/plugins.bundle.js"></script>
+   <!-- <script src="<?php echo base_url(); ?>assets/template/assets/plugins/global/plugins.bundle.js"></script>  -->
 
     <script src="<?php echo base_url(); ?>/assets/plugins/sweet-alert/sweetalert.min.js"></script>
 
@@ -1833,6 +1833,7 @@
                     events: [
 
                         <?php 
+                            error_reporting(0);
                                  foreach($jadwal as $j)
                                  {
 

@@ -302,10 +302,17 @@ class Api extends CI_Controller
 
         $jadwal  = $this->db->query("select * from jadwal where id_karyawan = '".$id_kar."' and date(tanggal) =  '".date('Y-m-d')."'")->Row();
 
+        $daily  = $this->db->query("select * from wfh_data where kar_id = '".$id_kar."' and date(wfd_createdate) =  '".date('Y-m-d')."' and wfd_lock = 'Y'")->Row();
 
         // echo "<pre>";
         // print_r($kar);
         // die;
+
+        if($daily){
+            $daily = "sudah_bikin_daily";
+        }else{
+            $daily = "belum_bikin_daily";
+        }
 
         if($jadwal->jenis_masuk=='WFO'){
 
@@ -324,7 +331,7 @@ class Api extends CI_Controller
         
 
         
-       
+        
 
 
 
@@ -406,6 +413,7 @@ class Api extends CI_Controller
                   'kantor'=>$kantor->kantor_nama,
                   'lokasi_skrang'=>$output->destination_addresses[0],
                   'lokasi_tujuan'=>$output->origin_addresses[0],
+                  'daily'=>$daily
               );
 
               echo json_encode($data_json);

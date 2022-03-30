@@ -10,7 +10,7 @@ class Daily extends CI_Controller {
 		// if(!$sess['pegawai']['kar_pvl']=='U'){
 		// 	redirect('auth');
 		// }
-        $this->load->model(array('auth/Auth_model','Daily_M'));
+        $this->load->model(array('auth/Auth_model','Daily_M','master/Kantor_M'));
 		
     }
 
@@ -289,6 +289,17 @@ class Daily extends CI_Controller {
 
 		$data['get_harian'] = $this->Daily_M->get_harian($nomor);
 		$this->template->load('template','print_daily',$data);
+	}
+
+
+
+	function location(){
+		
+
+		$data['kantor'] = $this->Kantor_M->getAll();
+		$this->template->load('template','location',$data);
+		//$this->load->view('testing');
+		
 	}
 
 	
