@@ -92,7 +92,7 @@ $autoload['drivers'] = array('cache');
 |
 |	$autoload['helper'] = array('url', 'file');
 */
-$autoload['helper'] = array('url','form','date_indonesia','url_encryption','file','function','jwt');
+$autoload['helper'] = array('url','form','date_indonesia','url_encryption','file','function');
 
 /*
 | -------------------------------------------------------------------
@@ -106,7 +106,7 @@ $autoload['helper'] = array('url','form','date_indonesia','url_encryption','file
 | config files.  Otherwise, leave it blank.
 |
 */
-$autoload['config'] = array('jwt');
+$autoload['config'] = array();
 
 /*
 | -------------------------------------------------------------------

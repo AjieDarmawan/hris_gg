@@ -23,7 +23,7 @@ date_default_timezone_set('Asia/Jakarta');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://localhost/tryout';
+$config['base_url'] = 'http://localhost/hris_gg';
 // $config['base_url'] = 'https://3easy.telkomsat.co.id/it';
 //$config['base_url'] = 'https://10.80.250.5/hcm';
 
