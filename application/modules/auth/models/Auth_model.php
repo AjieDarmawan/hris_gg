@@ -10,7 +10,7 @@ class Auth_model extends CI_Model
         $user = $this->db->select('*')
         ->from('users')
         ->where('username', $username)
-        ->where('status', 'Y')
+        ->where('status', '1')
         //->or_where('email', $username)
         ->limit(1)
         ->get()
@@ -47,6 +47,12 @@ class Auth_model extends CI_Model
             $result[]=$key->name;
         }
         return $result;
+    }
+
+    function select_by_id($id_user){
+        $sql = $this->db->query('select * from users where id_users='.$id_user)->row();
+
+        return $sql;
     }
 
 }

@@ -65,3 +65,19 @@ function dateDifference($date_1 , $date_2 , $differenceFormat = '%a' )
     return $interval->format($differenceFormat);
     
 }
+
+function mencarihari($date){
+	$daftar_hari = array(
+		'Sunday' => 'Minggu',
+		'Monday' => 'Senin',
+		'Tuesday' => 'Selasa',
+		'Wednesday' => 'Rabu',
+		'Thursday' => 'Kamis',
+		'Friday' => 'Jumat',
+		'Saturday' => 'Sabtu'
+	   );
+	   //$date=date('Y-m-d');
+	   $namahari = date('l', strtotime($date));
+	   
+	   return $daftar_hari[$namahari];
+}

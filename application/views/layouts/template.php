@@ -6,7 +6,7 @@
 <head>
     <base href="">
     <meta charset="utf-8" />
-    <title>HRIS</title>
+    <title>Tryout</title>
     <meta name="description"
         content="Metronic admin dashboard live demo. Check out all the features of the admin panel. A large number of settings, additional services and widgets." />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -62,7 +62,8 @@
     <div id="kt_header_mobile" class="header-mobile align-items-center header-mobile-fixed">
         <!--begin::Logo-->
         <?php
-        $sess = $this->session->userdata();
+         $sess = $this->session->userdata();
+       
         ?>
         <a href="index.html">
             <img alt="Logo" src="<?php echo base_url(); ?>assets/template/assets/media/logos/logo-light.png" />
@@ -335,7 +336,8 @@
                                     <span
                                         class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1">Hi,</span>
                                     <span
-                                        class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3"><?php echo $sess['pegawai']['nama_karyawan']; ?></span>
+                                        class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">
+                                        <?php echo $sess['pegawai']->username; ?></span>
                                     <span class="symbol symbol-lg-35 symbol-25 symbol-light-success">
                                         <span class="symbol-label font-size-h5 font-weight-bold">S</span>
                                     </span>
@@ -441,8 +443,8 @@
 
                 <div class="d-flex flex-column">
                     <a href="#"
-                        class="font-weight-bold font-size-h5 text-dark-75 text-hover-primary"><?php echo $sess['pegawai']['nama_karyawan']; ?></a>
-                    <div class="text-muted mt-1"><?php echo $sess['pegawai']['nama_karyawan']; ?></div>
+                        class="font-weight-bold font-size-h5 text-dark-75 text-hover-primary"><?php echo $sess['pegawai']->username; ?></a>
+                    <div class="text-muted mt-1"><?php echo $sess['pegawai']->username; ?></div>
                     <div class="navi mt-2">
                         <a href="#" class="navi-item">
                             <span class="navi-link p-0 pb-2">
