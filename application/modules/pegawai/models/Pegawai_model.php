@@ -15,12 +15,12 @@ class Pegawai_model extends CI_Model
         // return $result;
 
         $result = $this->db->select('*')
-        ->from('users mk')
-        ->join('m_karyawan k','k.id_karyawan = mk.id_kar')
+        ->from('acc_master mk')
+        ->join('kar_master k','k.kar_id = mk.kar_id')
       
 
 
-        ->where('mk.id_kar',$kar_id)
+        ->where('mk.kar_id',$kar_id)
         ->get()
         ->row_array();
 

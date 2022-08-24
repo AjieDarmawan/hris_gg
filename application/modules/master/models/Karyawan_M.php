@@ -5,16 +5,16 @@ class Karyawan_M extends CI_Model
 
 
     //set nama tabel yang akan kita tampilkan datanya
-    var $table = 'm_karyawan';
+    var $table = 'kar_master';
     //set kolom order, kolom pertama saya null untuk kolom edit dan hapus
-    var $column_order = array(null, 'nama_karyawan');
+    var $column_order = array(null, 'kar_nm');
 
-    var $column_search = array('nama_karyawan');
+    var $column_search = array('kar_nm');
     // default order 
-    var $order = array('id_karyawan' => 'asc');
+    var $order = array('kar_master.kar_id' => 'desc');
 
 
-    public $id_karyawan;
+    public $kar_id;
     public $div_nm;
     
 
@@ -28,8 +28,13 @@ class Karyawan_M extends CI_Model
 
     private function _get_datatables_query()
     {
+        $this->db->select('*');
+		$this->db->join('kar_detail', 'kar_detail.kar_id = kar_master.kar_id', 'inner');
         $this->db->from($this->table);
-       // $this->db->where('ktr_aktif','A');
+
+        $this->db->where('kar_detail.kar_dtl_typ_krj !=','Resign');
+
+
         $i = 0;
         foreach ($this->column_search as $item) // loop kolom 
         {
@@ -93,13 +98,13 @@ class Karyawan_M extends CI_Model
     
     public function getById($id)
     {
-        return $this->db->get_where($this->table, ["id_karyawan" => $id])->row();
+        return $this->db->get_where($this->table, ["kar_id" => $id])->row();
     }
 
     public function save($data = array())
     {
         // $post = $this->input->post();
-        // $this->id_karyawan = uniqid();
+        // $this->kar_id = uniqid();
         // $this->div_nm = $divisi;
         // $data = array(
         //     'div_nm'=>$divisi,
@@ -113,10 +118,10 @@ class Karyawan_M extends CI_Model
         return $this->db->insert('m_karyawan', $data);
     }
 
-    public function update($id_karyawan,$data = array())
+    public function update($kar_id,$data = array())
     {
         // $post = $this->input->post();
-        // $this->id_karyawan = $id_karyawan;
+        // $this->kar_id = $kar_id;
         // $this->div_nm = $div_nm;
 
         // $data = array(
@@ -124,11 +129,11 @@ class Karyawan_M extends CI_Model
         // );
 
        
-        return $this->db->update('m_karyawan', $data, array('id_karyawan' => $id_karyawan));
+        return $this->db->update('m_karyawan', $data, array('kar_id' => $kar_id));
     }
 
     public function delete($id)
     {
-        return $this->db->delete($this->table, array("id_karyawan" => $id));
+        return $this->db->delete($this->table, array("kar_id" => $id));
     }
 }

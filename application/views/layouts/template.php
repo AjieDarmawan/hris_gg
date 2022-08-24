@@ -3,6 +3,12 @@
 <html lang="en">
 <!--begin::Head-->
 
+<?php 
+    // echo "<pre>";
+    // print_r($sess);
+    // die;
+?>
+
 <head>
     <base href="">
     <meta charset="utf-8" />
@@ -335,7 +341,7 @@
                                     <span
                                         class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1">Hi,</span>
                                     <span
-                                        class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3"><?php echo $sess['pegawai']['nama_karyawan']; ?></span>
+                                        class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3"><?php echo $sess['pegawai']['kar_nm']; ?></span>
                                     <span class="symbol symbol-lg-35 symbol-25 symbol-light-success">
                                         <span class="symbol-label font-size-h5 font-weight-bold">S</span>
                                     </span>
@@ -441,8 +447,8 @@
 
                 <div class="d-flex flex-column">
                     <a href="#"
-                        class="font-weight-bold font-size-h5 text-dark-75 text-hover-primary"><?php echo $sess['pegawai']['nama_karyawan']; ?></a>
-                    <div class="text-muted mt-1"><?php echo $sess['pegawai']['nama_karyawan']; ?></div>
+                        class="font-weight-bold font-size-h5 text-dark-75 text-hover-primary"><?php echo $sess['pegawai']['kar_nm']; ?></a>
+                    <div class="text-muted mt-1"><?php echo $sess['pegawai']['kar_nm']; ?></div>
                     <div class="navi mt-2">
                         <a href="#" class="navi-item">
                             <span class="navi-link p-0 pb-2">
@@ -1834,35 +1840,44 @@
 
                         <?php 
                             error_reporting(0);
-                                 foreach($jadwal as $j)
+                                 foreach($jadwal as $key => $j)
                                  {
+
+                                    $ckey = strlen($key);
+
+                                    if($ckey=='1'){
+                                         $key2='0'.($key+1);
+                                    }else{
+                                        $key2=$key+1;
+                                    }
+                                    
 
                                     $level = $sess['pegawai']['level'];
 
                                    if($level=='A'){
                                     
 
-                                       $title =  $j->nama_karyawan .'-'. $j->jenis_masuk;;
+                                       $title =  $j .'-'. $j;
                                    }else{
-                                       $title = $j->jenis_masuk;
+                                       $title = $j;
                                    }
                              ?>
 
 
 
                         {
-                            title: '<?php echo $title;?>',
-                            start: '<?php echo $j->tanggal;?>',
-                            description: '<?php echo $j->jenis_masuk;?>',
-                            className: <?php if($j->jenis_masuk == 'L' ){
+                            title: '<?php echo $j;?>',
+                            start: '<?php echo date('Y-m-'.$key2)?>',
+                            description: '<?php echo $j;?>',
+                            className: <?php if($j == 'L' ){
                                             echo '"fc-event-solid-danger fc-event-light"';
                                     }
 
-                                    else if($j->jenis_masuk == 'LN' || $j->jenis_masuk == 'GL'){
+                                    else if($j == 'LN' || $j == 'GL'){
                                         echo '"fc-event-solid-danger fc-event-light"';
                                     }
 
-                                    else if($j->jenis_masuk == 'C' ){
+                                    else if($j == 'C' ){
                                         echo '"fc-event-solid-danger fc-event-light"';
                                     }
 

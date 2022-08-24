@@ -7,14 +7,16 @@ class Auth_model extends CI_Model
     public function login($username, $password)
     {
 
-        $user = $this->db->select('*')
-        ->from('users')
-        ->where('username', $username)
-        ->where('status', 'Y')
+         $user = $this->db->select('*')
+        ->from('acc_master')
+        ->where('acc_username', $username)
+        ->where('acc_sts', 'A')
         //->or_where('email', $username)
         ->limit(1)
         ->get()
         ->row_array();
+
+
 
 
         
@@ -28,7 +30,7 @@ class Auth_model extends CI_Model
         // }
 
        // $hash = crypt($password, $user['password']);
-        if ($password == $user['password'])
+        if ($password == $user['acc_password'])
         {
             return $user;
         }

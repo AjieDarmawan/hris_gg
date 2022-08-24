@@ -5,7 +5,7 @@ class Jabatan_M extends CI_Model
 
 
      //set nama tabel yang akan kita tampilkan datanya
-     var $table = 'm_jabatan';
+     var $table = 'jbt_master';
      //set kolom order, kolom pertama saya null untuk kolom edit dan hapus
      var $column_order = array(null, 'jbt_id');
  
@@ -15,7 +15,7 @@ class Jabatan_M extends CI_Model
 
 
 
-    private $_table = "m_jabatan";
+    private $_table = "jbt_master";
 
     public $jbt_id;
     public $jbt_nama;
@@ -47,8 +47,8 @@ class Jabatan_M extends CI_Model
 
 
 
-        $this->db->select('m_jabatan.*,m_divisi.divisi_nama');
-		$this->db->join('m_divisi', 'm_divisi.div_id = m_jabatan.div_id', 'inner');
+        $this->db->select('jbt_master.*,div_master.div_nm');
+		$this->db->join('div_master', 'div_master.div_id = jbt_master.div_id', 'inner');
         $this->db->from($this->table);
 		
 
@@ -157,7 +157,7 @@ class Jabatan_M extends CI_Model
 
         // print_r($data);
         // die;
-        return $this->db->insert('m_jabatan', $data);
+        return $this->db->insert('jbt_master', $data);
     }
 
     public function update($jbt_id,$jabatan_nama,$div_id)
@@ -176,7 +176,7 @@ class Jabatan_M extends CI_Model
         );
 
        
-        return $this->db->update('m_jabatan', $data, array('jbt_id' => $jbt_id));
+        return $this->db->update('jbt_master', $data, array('jbt_id' => $jbt_id));
     }
 
     public function delete($id)

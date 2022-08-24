@@ -35,7 +35,7 @@
 
                                     <th>Status Perkawinan</th>
                                    
-                                    <th>No Wa</th>
+                                    <!-- <th>No Wa</th>
 
                                     <th>Pendidikan</th>
                                     <th>Sekolah Terakhir</th>
@@ -52,7 +52,7 @@
 
 
                                   
-                                    <th>Tanggal Join</th>
+                                    <th>Tanggal Join</th> -->
 
                                 </tr>
                             </thead>

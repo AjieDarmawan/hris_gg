@@ -76,11 +76,20 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
+	// 'hostname' => 'cb.web.id',
+	// 'username' => 'absen',
+	// 'password' => '2014sukses',
+	// 'database' => 'absen',
+	// 'dbdriver' => 'mysqli',
+
+
 	'hostname' => 'localhost',
 	'username' => 'root',
 	'password' => '',
-	'database' => 'hris',
+	'database' => 'absen',
 	'dbdriver' => 'mysqli',
+
+
 	'dbprefix' => '',
 	'pconnect' => FALSE,
 	'db_debug' => (ENVIRONMENT !== 'production'),

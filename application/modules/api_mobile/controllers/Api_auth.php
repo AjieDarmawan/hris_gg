@@ -15,6 +15,47 @@ class Api_auth extends CI_Controller
 		
     }
 
+    function kar_tampil_id($kar_id)
+	{
+		$sql = "SELECT kar_master.kar_nik,
+        kar_master.kar_nik,
+        kar_master.kar_nm,
+        kar_master.kar_tgl_lahir,
+        kar_master.kar_long,
+        kar_master.kar_lat,
+        kar_master.kar_radius,
+        acc_master.acc_img, 
+        jbt_master.jbt_nm,lvl_master.lvl_nm,div_master.div_nm,unt_nm,ktr_master.ktr_nm,
+        kar_detail.kar_dtl_alt,
+        kar_detail.kar_dtl_tlp,
+        kar_detail.kar_dtl_eml,
+        kar_detail.kar_dtl_no_ktp,
+        kar_detail.kar_dtl_tmp_lhr,
+        kar_detail.kar_dtl_pnd,
+        kar_detail.kar_dtl_tgl_joi
+        FROM 
+        kar_master,
+        jbt_master,
+        lvl_master,
+        div_master,
+        unt_master,
+        ktr_master,
+        acc_master,
+        kar_detail
+         WHERE 
+        kar_master.jbt_id=jbt_master.jbt_id AND 
+        kar_master.lvl_id=lvl_master.lvl_id AND
+        kar_master.div_id=div_master.div_id AND
+        kar_master.unt_id=unt_master.unt_id AND
+        kar_master.ktr_id=ktr_master.ktr_id AND
+        acc_master.kar_id=kar_master.kar_id AND
+        kar_detail.kar_id=kar_master.kar_id AND
+        kar_master.kar_id='$kar_id'
+        ORDER BY kar_master.kar_id";
+		$query = $this->db->query($sql)->row();
+        return $query;
+	}
+
 
     
 
@@ -45,6 +86,14 @@ class Api_auth extends CI_Controller
 
 
            
+    }
+
+    function users_detail(){
+        $kar_id = $this->input->post('kar_id');
+
+       $kar = $this->kar_tampil_id($kar_id);
+
+       echo json_encode($kar);
     }
 
    

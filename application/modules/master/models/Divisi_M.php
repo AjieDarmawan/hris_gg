@@ -5,17 +5,17 @@ class Divisi_M extends CI_Model
 
 
     //set nama tabel yang akan kita tampilkan datanya
-    var $table = 'm_divisi';
+    var $table = 'div_master';
     //set kolom order, kolom pertama saya null untuk kolom edit dan hapus
-    var $column_order = array(null, 'divisi_nama');
+    var $column_order = array(null, 'div_nm');
 
-    var $column_search = array('divisi_nama');
+    var $column_search = array('div_nm');
     // default order 
     var $order = array('div_id' => 'asc');
 
 
     public $div_id;
-    public $divisi_nama;
+    public $div_nm;
     
 
 
@@ -80,7 +80,7 @@ class Divisi_M extends CI_Model
 
 
 
-    // private $_table = "m_divisi";
+    // private $_table = "div_master";
 
   
 
@@ -98,25 +98,25 @@ class Divisi_M extends CI_Model
     {
         // $post = $this->input->post();
         // $this->div_id = uniqid();
-        // $this->divisi_nama = $divisi;
+        // $this->div_nm = $divisi;
         $data = array(
-            'divisi_nama'=>$divisi,
+            'div_nm'=>$divisi,
         );
-        return $this->db->insert('m_divisi', $data);
+        return $this->db->insert('div_master', $data);
     }
 
-    public function update($div_id,$divisi_nama)
+    public function update($div_id,$div_nm)
     {
         // $post = $this->input->post();
         // $this->div_id = $div_id;
-        // $this->divisi_nama = $divisi_nama;
+        // $this->div_nm = $div_nm;
 
         $data = array(
-            'divisi_nama'=>$divisi_nama,
+            'div_nm'=>$div_nm,
         );
 
        
-        return $this->db->update('m_divisi', $data, array('div_id' => $div_id));
+        return $this->db->update('div_master', $data, array('div_id' => $div_id));
     }
 
     public function delete($id)

@@ -219,20 +219,51 @@ class Absen extends CI_Controller
     function jadwal(){
 
         $sess = $this->session->userdata();
+        // echo "<pre>";
+        // print_r($sess);
+        // die;
 
-        $id_kar = $sess['pegawai']['id_kar'];
+        $kar_id = $sess['pegawai']['kar_id'];
 
-        $level = $sess['pegawai']['level'];
+        $kar_nik = $sess['pegawai']['kar_nik'];
+
+        $level = $sess['pegawai']['kar_pvl'];
 
         
+         //$bulan = date('mY');
+         $bulan = '072021';
 
+      
         if($level=='A'){
             $data['jadwal'] = $this->db->query("select j.*,m.nama_karyawan from jadwal as j
             inner join m_karyawan as m on m.id_karyawan = j.id_karyawan")->result();
         }else{
-            $data['jadwal'] = $this->db->query("select j.*,m.nama_karyawan from jadwal as j
-            inner join m_karyawan as m on m.id_karyawan = j.id_karyawan where  j.id_karyawan = '".$id_kar."'")->result();
+            // $data['jadwal'] = $this->db->query("select j.*,m.nama_karyawan from jadwal as j
+            // inner join m_karyawan as m on m.id_karyawan = j.id_karyawan where  j.id_karyawan = '".$id_kar."'")->result();
+       
+          
+              $data['jadwal2'] = $this->db->query("select * from jdw_master as j
+              inner join kar_master as k on j.jdw_nik=k.kar_nik 
+              where  j.jdw_blnthn = '".$bulan."' and j.jdw_nik='".$kar_nik."'")->result();
+       
+       
         }
+
+
+        // echo "<pre>";
+        // print_r($data['jadwal2'][0]->jdw_nama);
+
+        // die;
+        $jad = $data['jadwal2'][0]->jdw_data;
+
+        $jadw = explode("#",$jad);
+        
+        //   echo "<pre>";
+        // print_r($jadw);
+        // die;
+
+        $data['jadwal'] = $jadw;
+        $data['nama'] = $data['jadwal2'][0]->jdw_nama;
 
       
       

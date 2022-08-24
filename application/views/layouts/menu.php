@@ -46,7 +46,7 @@ $sess = $this->session->userdata();
 
 
                 <?php 
-								if($sess['pegawai']['level']=='A'){
+								if($sess['pegawai']['kar_pvl']=='U'){
 							?>
                 <li class="menu-item menu-item-active" aria-haspopup="true">
                     <a href="<?php echo base_url('master/dashboard')?>" class="menu-link">
@@ -181,7 +181,7 @@ $sess = $this->session->userdata();
                                     <i class="menu-bullet menu-bullet-line">
                                         <span></span>
                                     </i>
-                                    <span class="menu-text">Absensi</span>
+                                    <span class="menu-text">Penggajian</span>
                                     <span class="menu-label">
                                         <!-- <span class="label label-rounded label-primary">6</span> -->
                                     </span>
@@ -191,21 +191,85 @@ $sess = $this->session->userdata();
                                     <i class="menu-arrow"></i>
                                     <ul class="menu-subnav">
                                         <li class="menu-item" aria-haspopup="true">
-                                            <a href="<?php echo base_url('absen/upload_jadwal')?>" class="menu-link">
+                                            <a href="<?php echo base_url('gaji/komponen_gaji')?>" class="menu-link">
                                                 <i class="menu-bullet menu-bullet-dot">
                                                     <span></span>
                                                 </i>
-                                                <span class="menu-text">Upload Jadwal </span>
+                                                <span class="menu-text">Komponen Gaji</span>
                                             </a>
                                         </li>
 
 
                                         <li class="menu-item" aria-haspopup="true">
-                                            <a href="<?php echo base_url('absen/jadwal')?>" class="menu-link">
+                                            <a href="<?php echo base_url('gaji/sembako')?>" class="menu-link">
                                                 <i class="menu-bullet menu-bullet-dot">
                                                     <span></span>
                                                 </i>
-                                                <span class="menu-text">Jadwal </span>
+                                                <span class="menu-text">Sembako </span>
+                                            </a>
+                                        </li>
+
+                                        <li class="menu-item" aria-haspopup="true">
+                                            <a href="<?php echo base_url('gaji/listrik')?>" class="menu-link">
+                                                <i class="menu-bullet menu-bullet-dot">
+                                                    <span></span>
+                                                </i>
+                                                <span class="menu-text">Listrik </span>
+                                            </a>
+                                        </li>
+
+                                        <li class="menu-item" aria-haspopup="true">
+                                            <a href="<?php echo base_url('gaji/paguyuban')?>" class="menu-link">
+                                                <i class="menu-bullet menu-bullet-dot">
+                                                    <span></span>
+                                                </i>
+                                                <span class="menu-text">Paguyuban </span>
+                                            </a>
+                                        </li>
+
+                                        <li class="menu-item" aria-haspopup="true">
+                                            <a href="<?php echo base_url('gaji/dinas_lk')?>" class="menu-link">
+                                                <i class="menu-bullet menu-bullet-dot">
+                                                    <span></span>
+                                                </i>
+                                                <span class="menu-text">Dinas Luar Kota </span>
+                                            </a>
+                                        </li>
+
+                                        <li class="menu-item" aria-haspopup="true">
+                                            <a href="<?php echo base_url('gaji/insentif')?>" class="menu-link">
+                                                <i class="menu-bullet menu-bullet-dot">
+                                                    <span></span>
+                                                </i>
+                                                <span class="menu-text">Insentif </span>
+                                            </a>
+                                        </li>
+
+                                        <li class="menu-item" aria-haspopup="true">
+                                            <a href="<?php echo base_url('gaji/bpjs')?>" class="menu-link">
+                                                <i class="menu-bullet menu-bullet-dot">
+                                                    <span></span>
+                                                </i>
+                                                <span class="menu-text">Bpjs </span>
+                                            </a>
+                                        </li>
+
+                                        <li class="menu-item" aria-haspopup="true">
+                                            <a href="<?php echo base_url('gaji/pajak')?>" class="menu-link">
+                                                <i class="menu-bullet menu-bullet-dot">
+                                                    <span></span>
+                                                </i>
+                                                <span class="menu-text">Pajak </span>
+                                            </a>
+                                        </li>
+
+
+                                        <li class="menu-item" aria-haspopup="true">
+                                            <a href="<?php echo base_url('gaji/final_gaji')?>" class="menu-link">
+                                                <i class="menu-bullet menu-bullet-dot">
+                                                    <span></span>
+                                                </i>
+                                                <span class="menu-text"> Final Gaji </span>
                                             </a>
                                         </li>
 
@@ -219,10 +283,10 @@ $sess = $this->session->userdata();
 
 
 
-                <li class="menu-item menu-item" aria-haspopup="true">
+                <!-- <li class="menu-item menu-item" aria-haspopup="true">
                     <a href="<?php echo base_url('daily/')?>" class="menu-link">
                         <span class="svg-icon menu-icon">
-                            <!--begin::Svg Icon | path:assets/template/assets/media/svg/icons/Design/Layers.svg-->
+                         
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                 width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -235,17 +299,17 @@ $sess = $this->session->userdata();
                                         fill="#000000" opacity="0.3" />
                                 </g>
                             </svg>
-                            <!--end::Svg Icon-->
+                          
                         </span>
                         <span class="menu-text">Daily Activiy</span>
                     </a>
-                </li>
+                </li> -->
 
 
-                <li class="menu-item menu-item" aria-haspopup="true">
+                <!-- <li class="menu-item menu-item" aria-haspopup="true">
                     <a href="<?php echo base_url('daily/location')?>" class="menu-link">
                         <span class="svg-icon menu-icon">
-                            <!--begin::Svg Icon | path:assets/template/assets/media/svg/icons/Design/Layers.svg-->
+                           
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                 width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -258,17 +322,17 @@ $sess = $this->session->userdata();
                                         fill="#000000" opacity="0.3" />
                                 </g>
                             </svg>
-                            <!--end::Svg Icon-->
+                          
                         </span>
                         <span class="menu-text">Monitoring Location</span>
                     </a>
-                </li>
+                </li> -->
 
 
 
                 <?php 
 								}
-								else if($sess['pegawai']['level']=='U'){
+								else if($sess['pegawai']['kar_pvl']=='U'){
 								?>
 
 

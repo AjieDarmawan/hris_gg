@@ -47,34 +47,34 @@ class Karyawan extends CI_Controller
             $no++;
             $row = array();
             $row[] = $no;
-            $row[] = $data_Karyawan->nik_ktp;
-            $row[] = $data_Karyawan->nik_kantor;
-            $row[] = $data_Karyawan->nama_karyawan;
-            $row[] = $data_Karyawan->tempat_lahir;
-            $row[] = $data_Karyawan->tanggal_lahir;
+            $row[] = $data_Karyawan->kar_dtl_no_ktp;
+            $row[] = $data_Karyawan->kar_nik;
+            $row[] = $data_Karyawan->kar_nm;
+            $row[] = $data_Karyawan->kar_dtl_tmp_lhr;
+            $row[] = $data_Karyawan->kar_tgl_lahir;
 
-            $row[] = $data_Karyawan->jenis_kelamin;
+            $row[] = $data_Karyawan->kar_dtl_gen;
             
-            $row[] = $data_Karyawan->agama;
+            $row[] = $data_Karyawan->kar_dtl_no_ktp;
 
-            $row[] = $data_Karyawan->status_perkawinan;
+            $row[] = $data_Karyawan->kar_dtl_sts_nkh;
             
-            $row[] = $data_Karyawan->no_wa;
-            $row[] = $data_Karyawan->pendidikan;
-            $row[] = $data_Karyawan->sekolah_terakhir;
-            $row[] = $data_Karyawan->tahun_masuk;
-            $row[] = $data_Karyawan->tahun_keluar;
-            $row[] = $data_Karyawan->nilai;
+            // $row[] = $data_Karyawan->kar_dtl_no_ktp;
+            // $row[] = $data_Karyawan->kar_dtl_no_ktp;
+            // $row[] = $data_Karyawan->kar_dtl_no_ktp;
+            // $row[] = $data_Karyawan->kar_dtl_no_ktp;
+            // $row[] = $data_Karyawan->kar_dtl_no_ktp;
+            // $row[] = $data_Karyawan->kar_dtl_no_ktp;
 
 
-            $row[] = $data_Karyawan->nama_keluarga;
-            $row[] = $data_Karyawan->hubungan_keluarga;
-            $row[] = $data_Karyawan->no_hp_keluarga;
+            // $row[] = $data_Karyawan->kar_dtl_no_ktp;
+            // $row[] = $data_Karyawan->kar_dtl_no_ktp;
+            // $row[] = $data_Karyawan->kar_dtl_no_ktp;
       
 
 
            
-            $row[] = $data_Karyawan->tanggal_join;
+            // $row[] = $data_Karyawan->kar_dtl_no_ktp;
            	$row[] = $edit." ".$delete;
 
             $data[] = $row;

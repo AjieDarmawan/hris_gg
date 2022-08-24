@@ -35,9 +35,14 @@ class Auth extends CI_Controller
             $user = $this->auth_model->login(
                 $this->input->post('username'), 
                 $this->input->post('password'));
-               
+             
+          
  
-            $pegawai = $this->Pegawai_model->select_by_id($user['id_kar']);
+            $pegawai = $this->Pegawai_model->select_by_id($user['kar_id']);
+
+            // echo "<pre>";
+            // print_r($pegawai);
+            //     die;
 
 
             if($user){

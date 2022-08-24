@@ -46,12 +46,12 @@ class Kantor extends CI_Controller
             $no++;
             $row = array();
             $row[] = $no;
-            $row[] = $data_Kantor->kantor_kd;
-            $row[] = $data_Kantor->kantor_nama;
-            $row[] = $data_Kantor->koordinator;
-            $row[] = $data_Kantor->lat;
-            $row[] = $data_Kantor->long;
-            $row[] = $data_Kantor->radius;
+            $row[] = $data_Kantor->ktr_kd;
+            $row[] = $data_Kantor->ktr_nm;
+            $row[] = $data_Kantor->ktr_koordinator;
+            $row[] = $data_Kantor->ktr_lat;
+            $row[] = $data_Kantor->ktr_long;
+            $row[] = $data_Kantor->ktr_radius;
            
            	$row[] = $edit." ".$delete;
 

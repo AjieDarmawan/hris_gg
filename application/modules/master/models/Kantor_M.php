@@ -5,11 +5,11 @@ class Kantor_M extends CI_Model
 
 
     //set nama tabel yang akan kita tampilkan datanya
-    var $table = 'm_kantor';
+    var $table = 'ktr_master';
     //set kolom order, kolom pertama saya null untuk kolom edit dan hapus
-    var $column_order = array(null, 'kantor_nama');
+    var $column_order = array(null, 'ktr_nm');
 
-    var $column_search = array('kantor_nama');
+    var $column_search = array('ktr_nm');
     // default order 
     var $order = array('ktr_id' => 'asc');
 
@@ -108,7 +108,7 @@ class Kantor_M extends CI_Model
         // echo "<pre>";
         // print_r($data);
         // die;
-        return $this->db->insert('m_kantor', $data);
+        return $this->db->insert('ktr_master', $data);
     }
 
     public function update($ktr_id,$data = array())
@@ -122,7 +122,7 @@ class Kantor_M extends CI_Model
         // );
 
        
-        return $this->db->update('m_kantor', $data, array('ktr_id' => $ktr_id));
+        return $this->db->update('ktr_master', $data, array('ktr_id' => $ktr_id));
     }
 
     public function delete($id)
