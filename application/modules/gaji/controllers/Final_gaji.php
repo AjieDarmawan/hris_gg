@@ -8,7 +8,7 @@ class Final_gaji extends CI_Controller
 
     function __construct(){
 		parent::__construct();
-		if(!$this->session->userdata(['pegawai']['kar_pvl']=='U')){
+		if(!$this->session->userdata()['pegawai']){
 			redirect('auth');
 		}
         $this->load->model(array('Final_gaji_M'));
