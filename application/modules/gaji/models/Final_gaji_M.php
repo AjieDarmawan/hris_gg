@@ -35,6 +35,9 @@ class Final_gaji_M extends CI_Model
         $this->db->from($this->table);
 
         $this->db->where('kar_detail.kar_dtl_typ_krj !=','Resign');
+
+              // $this->db->where('kar_master.kar_id','433');
+
         $i = 0;
         foreach ($this->column_search as $item) // loop kolom 
         {
@@ -105,6 +108,9 @@ class Final_gaji_M extends CI_Model
         $this->db->from($this->table);
 
         $this->db->where('kar_detail.kar_dtl_typ_krj !=','Resign');
+
+        
+              // $this->db->where('kar_master.kar_id','433');
 
         $query = $this->db->get();
         return $query->result();

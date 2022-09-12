@@ -2,16 +2,16 @@
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Insentif extends CI_Controller
+class Uang_Pisah extends CI_Controller
 {
 
 
     function __construct(){
 		parent::__construct();
 		if(!$this->session->userdata()['pegawai']){
-            redirect('auth');
-        }
-        $this->load->model(array('Insentif_M'));
+			redirect('auth');
+		}
+        $this->load->model(array('Uang_Pisah_M'));
 		
     }
 
@@ -21,11 +21,16 @@ class Insentif extends CI_Controller
     // redirect if needed, otherwise display the user list
     public function index()
     {
-      
+           
+        $tahun = date('Y');
+        $data['risen'] = $this->db->query("select year(kar_dtl_tgl_res) as tahun, k.kar_id,k.kar_nm,k.kar_nik from kar_master as k inner join kar_detail as d on k.kar_id = d.kar_id 
+        where d.kar_dtl_tgl_res != '0000-00-00' and year(kar_dtl_tgl_res) = '".$tahun."'")->result();
 
-        //$data["divisi"] = $this->Insentif_M->getAll();
-        $data["title"] = "List Data Master Insentif";
-        $this->template->load('template','insentif/insentif_v',$data);
+        
+
+        //$data["divisi"] = $this->Uang_Pisah_M->getAll();
+        $data["title"] = "List Data  Uang Pisah";
+        $this->template->load('template','uang_pisah/uang_pisah_v',$data);
      
     }
 
@@ -33,11 +38,11 @@ class Insentif extends CI_Controller
     public function ajax_list()
     {
         header('Content-Type: application/json');
-        $list = $this->Insentif_M->get_datatables();
+        $list = $this->Uang_Pisah_M->get_datatables();
         $data = array();
         $no = $this->input->post('start');
         //looping data mahasiswa
-        foreach ($list as $data_insentif) {
+        foreach ($list as $data_uang_pisah) {
 
 
          
@@ -46,12 +51,10 @@ class Insentif extends CI_Controller
             $no++;
             $row = array();
             $row[] = $no;
-            $row[] = $data_insentif->kar_nik;
-            $row[] = $data_insentif->kar_nm;
-            $row[] = date('M-Y',strtotime($data_insentif->bulan));
-            $row[] = date('M-Y',strtotime($data_insentif->bulan_dibayarkan));
-            $row[] = number_format($data_insentif->jumlah);
-           
+            $row[] = $data_uang_pisah->kar_nik;
+            $row[] = $data_uang_pisah->kar_nm;
+            $row[] = date('M-Y',strtotime($data_uang_pisah->bulan));
+            $row[] = number_format($data_uang_pisah->nominal);
           
            
           
@@ -62,8 +65,8 @@ class Insentif extends CI_Controller
         }
         $output = array(
             "draw" => $this->input->post('draw'),
-            "recordsTotal" => $this->Insentif_M->count_all(),
-            "recordsFiltered" => $this->Insentif_M->count_filtered(),
+            "recordsTotal" => $this->Uang_Pisah_M->count_all(),
+            "recordsFiltered" => $this->Uang_Pisah_M->count_filtered(),
             "data" => $data,
         );
         //output to json format
@@ -74,7 +77,7 @@ class Insentif extends CI_Controller
     function upload_excel(){
        
        
-        error_reporting(0);
+      
         if(isset($_FILES["file"]["name"]))
         {
 
@@ -137,13 +140,15 @@ class Insentif extends CI_Controller
             if($k[0][0]!='nik' and $k[0][0]!='NIK' and $k[0][0]!=''){
 
                 $bulan = $this->input->post('bulan');
-                $bulan_dibayarkan  = $this->input->post('bulan_dibayarkan');
          
                
 
                 $nik = $k[0][0];
-               
-                $jumlah = $k[0][1];
+                $nama = $k[0][1];
+                $no_pel = $k[0][2];
+                $pam = $k[0][3];
+                $uang_pisah = $k[0][4];
+                $total = $k[0][5];
 
                 $insert_nik = $this->db->query("select * from kar_master where kar_nik='".$nik."'")->row();
               
@@ -152,20 +157,22 @@ class Insentif extends CI_Controller
                     'kar_id'=> $insert_nik->kar_id,
                     'nik'=>$nik,
                     //'nama'=>$nama,
-                    'jumlah'=>$jumlah,
+                    'no_pel'=>$no_pel,
+                    'pam'=>$pam,
+                    'uang_pisah'=>$uang_pisah,
+                    'total'=>$total,
                     'crdt'=>date('Y-m-d H:i:s'),
                     'bulan'=>$bulan,
-                    'bulan_dibayarkan'=>$bulan_dibayarkan,
 
 
                 );
 
-                $cek_update = $this->db->query("select * from payroll.insentif where nik='".$nik."'")->row();
+                $cek_update = $this->db->query("select * from payroll.uang_pisah where nik='".$nik."'")->row();
 
                 if($cek_update){
-                    $this->db->update('payroll.insentif',$data_simpan,array('nik',$nik));
+                    $this->db->update('payroll.uang_pisah',$data_simpan,array('nik',$nik));
                 }else{
-                    $this->db->insert('payroll.insentif',$data_simpan);
+                    $this->db->insert('payroll.uang_pisah',$data_simpan);
                 }
                
 
@@ -177,7 +184,7 @@ class Insentif extends CI_Controller
               'message'=>'<div class="alert alert-success">Import file Suksess</div>',
           );
            $this->session->set_flashdata($message);
-          redirect('gaji/insentif');
+          redirect('gaji/uang_pisah');
 
 
       
@@ -197,6 +204,35 @@ class Insentif extends CI_Controller
         //   $this->session->set_flashdata($message);
         //   redirect('import');
       }
+    }
+
+
+    function simpan(){
+       $kar_id = $this->input->post('kar_id');
+       $nominal = $this->input->post('nominal');
+       $bulan = $this->input->post('bulan');
+
+       $k = $this->db->query('select kar_nm,kar_nik from kar_master where kar_id="'.$kar_id.'"')->row();
+
+       $data_simpan = array(
+        'kar_id'=>$kar_id,
+        'kar_nm'=>$k->kar_nm,
+        'kar_nik'=>$k->kar_nik,
+        'nominal'=>$nominal,
+        'bulan'=>$bulan,
+        'crdt'=>date('Y-m-d H:i:s'),
+       );
+
+       $this->db->insert('payroll.uang_pisah',$data_simpan);
+
+              $message = array(
+              'message'=>'<div class="alert alert-primary">Sukkses</div>',
+          );
+          
+          $this->session->set_flashdata($message);
+       redirect('gaji/uang_pisah');
+    
+    
     }
 
     

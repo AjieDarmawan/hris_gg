@@ -1,7 +1,7 @@
 <center><h2>Laporan Penggajian <?php echo BulanIndo(date('m'))?> <?php echo ' '. date('Y')?></h2></center>
 
 <table border="1">
-<thead>
+                <thead>
                     <tr class="table-success">
                         <th></th>
                         <th>Jumlah Hari Masuk</th>
@@ -43,7 +43,6 @@
                         <th>JP (PK) 2%</th>
                         <th>Iuran Paguyuban</th>
                         <th>Paguyuban</th>
-                        <th>Total Potongan</th>
                         <th>Total diterima</th>
 
 
@@ -117,102 +116,17 @@
                         // $total_gaji = $tot_gaji->tot;
 
 
-                        $tot_gaji_aa = $this->db->query('select sum(gaji_pokok+t_struktural) as tot from payroll.komponen_gaji where kar_id =  "'.$m->kar_id.'"')->row();
-                                    
-                      
-            
-                        $tot_gaji_a = $tot_gaji_aa->tot;
-            
-                        $bpjs_default = 4217206;
-            
-            
-                        //12000000
-                        if($total_gaji>=$bpjs_default){
-                            // A 
-            
-                            if($tot_gaji_a>$bpjs_default){
-            
-                                $bpjs_k  = $tot_gaji_a*1/100;
-                                $bpjs_pk = $tot_gaji_a*4/100;
-                
-                                $jht_k  = $tot_gaji_a*2/100;
-                                $jht_pk = $tot_gaji_a*3.70/100;
-                
-                                $jp_k  = $tot_gaji_a*1/100;
-                                $jp_pk  = $tot_gaji_a*2/100;
-                
-                                $jkk_pk = $tot_gaji_a*0.4/100;
-                                $jkm_pk = $tot_gaji_a*0.30/100;
-                
-                                $bpjs_k  = $tot_gaji_a*1/100;
-                                $bpjs_pk = $tot_gaji_a*4/100;
-                
-                                $jht_k  = $tot_gaji_a*2/100;
-                                $jht_pk = $tot_gaji_a*3.70/100;
-                
-                                $jp_k  = $tot_gaji_a*1/100;
-                                $jp_pk  = $tot_gaji_a*2/100;
-                
-                                $jkk_pk = $tot_gaji_a*0.4/100;
-                                $jkm_pk = $tot_gaji_a*0.30/100;
-            
-                            }else{
-                                $bpjs_k  = $bpjs_default*1/100;
-                                $bpjs_pk = $bpjs_default*4/100;
-            
-                                $jht_k  = $bpjs_default*2/100;
-                                $jht_pk = $bpjs_default*3.70/100;
-            
-                                $jp_k  = $bpjs_default*1/100;
-                                $jp_pk  = $bpjs_default*2/100;
-            
-                                $jkk_pk = $bpjs_default*0.4/100;
-                                $jkm_pk = $bpjs_default*0.30/100;
-            
-                                $bpjs_k  = $bpjs_default*1/100;
-                                $bpjs_pk = $bpjs_default*4/100;
-            
-                                $jht_k  = $bpjs_default*2/100;
-                                $jht_pk = $bpjs_default*3.70/100;
-            
-                                $jp_k  = $bpjs_default*1/100;
-                                $jp_pk  = $bpjs_default*2/100;
-            
-                                $jkk_pk = $bpjs_default*0.4/100;
-                                $jkm_pk = $bpjs_default*0.30/100;
-                            }
-            
-                        }elseif($total_gaji>=12000000){
-                            // A + B;
-            
-                            $bpjs_k  = $tot_gaji_a*1/100;
-                            $bpjs_pk = $tot_gaji_a*4/100;
-            
-                            $jht_k  = $tot_gaji_a*2/100;
-                            $jht_pk = $tot_gaji_a*3.70/100;
-            
-                            $jp_k  = $tot_gaji_a*1/100;
-                            $jp_pk  = $tot_gaji_a*2/100;
-            
-                            $jkk_pk = $tot_gaji_a*0.4/100;
-                            $jkm_pk = $tot_gaji_a*0.30/100;
-            
-                            $bpjs_k  = $tot_gaji_a*1/100;
-                            $bpjs_pk = $tot_gaji_a*4/100;
-            
-                            $jht_k  = $tot_gaji_a*2/100;
-                            $jht_pk = $tot_gaji_a*3.70/100;
-            
-                            $jp_k  = $tot_gaji_a*1/100;
-                            $jp_pk  = $tot_gaji_a*2/100;
-            
-                            $jkk_pk = $tot_gaji_a*0.4/100;
-                            $jkm_pk = $tot_gaji_a*0.30/100;
-            
-                            
-                     
-            
-                        }
+                        $bpjs_k  = $total_gaji * 1 / 100;
+                        $bpjs_pk = $total_gaji * 4 / 100;
+
+                        $jht_k  = $total_gaji * 2 / 100;
+                        $jht_pk = $total_gaji * 3.70 / 100;
+
+                        $jp_k  = $total_gaji * 1 / 100;
+                        $jp_pk  = $total_gaji * 2 / 100;
+
+                        $jkk_pk = $total_gaji * 0.4 / 100;
+                        $jkm_pk = $total_gaji * 0.30 / 100;
 
 
                         $tot_bpjs_k += $bpjs_k;
@@ -232,7 +146,7 @@
                         $iuran_paguyuban = 55000;
 
 
-                        $potongan = $bpjs_k + $jht_k + $iuran_paguyuban + $jp_k + $paguyuban + $t_beras;
+                        $potongan = $bpjs_k + $jht_k + $iuran_paguyuban + $jp_k + $paguyuban;
 
 
                        
@@ -329,7 +243,6 @@
                             <td><?php echo number_format($jp_pk) ?> </td>
                             <td><?php echo number_format($iuran_paguyuban) ?> </td>
                             <td><?php echo number_format($paguyuban) ?> </td>
-                            <td><?php echo number_format($potongan) ?> </td>
                             <td><b><?php echo number_format($total_penerimaan) ?> <b></td> 
                             
                            

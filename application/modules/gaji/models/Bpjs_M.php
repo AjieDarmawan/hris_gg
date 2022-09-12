@@ -29,7 +29,7 @@ class Bpjs_M extends CI_Model
     private function _get_datatables_query()
     {   
 
-        $this->db->select('kar_detail.*,kar_master.kar_nik,kar_master.kar_nm,DATE_ADD(kar_detail.kar_dtl_tgl_joi, INTERVAL "3" MONTH) as bulan_tiga');
+        $this->db->select('kar_detail.*,kar_master.kar_nik,kar_master.kar_nm');
        
         $this->db->join('kar_detail', 'kar_detail.kar_id = kar_master.kar_id', 'left');
         $this->db->from($this->table);
@@ -99,13 +99,12 @@ class Bpjs_M extends CI_Model
     public function getAll()
     {
 
-        $this->db->select('kar_detail.*,kar_master.kar_nik,kar_master.kar_nm,kar_master.kar_id,DATE_ADD(kar_detail.kar_dtl_tgl_joi, INTERVAL "3" MONTH) as bulan_tiga');
+        $this->db->select('kar_detail.*,kar_master.kar_nik,kar_master.kar_nm,kar_master.kar_id');
        
         $this->db->join('kar_detail', 'kar_detail.kar_id = kar_master.kar_id', 'left');
         $this->db->from($this->table);
 
         $this->db->where('kar_detail.kar_dtl_typ_krj !=','Resign');
-        $this->db->where('DATE_ADD(kar_detail.kar_dtl_tgl_joi, INTERVAL "3" MONTH) <=','CURDATE()');
 
         $query = $this->db->get();
         return $query->result();

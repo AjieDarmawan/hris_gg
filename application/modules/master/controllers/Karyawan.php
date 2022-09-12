@@ -58,6 +58,9 @@ class Karyawan extends CI_Controller
             $row[] = $data_Karyawan->kar_dtl_no_ktp;
 
             $row[] = $data_Karyawan->kar_dtl_sts_nkh;
+
+             $row[] = $data_Karyawan->pajak_status;
+              $row[] = $data_Karyawan->pajak_tanggungan;
             
             // $row[] = $data_Karyawan->kar_dtl_no_ktp;
             // $row[] = $data_Karyawan->kar_dtl_no_ktp;
@@ -293,6 +296,131 @@ class Karyawan extends CI_Controller
 		}
 
 		echo json_encode($datas);
+    }
+
+
+     function upload_excel(){
+       
+        error_reporting(0);
+      
+        if(isset($_FILES["file"]["name"]))
+        {
+
+
+           
+            // upload
+          $file_tmp = $_FILES['file']['tmp_name'];
+          $file_name = $_FILES['file']['name'];
+          $file_size =$_FILES['file']['size'];
+          $file_type=$_FILES['file']['type'];
+          // move_uploaded_file($file_tmp,"uploads/".$file_name); // simpan filenya di folder uploads
+          
+          $object = PHPExcel_IOFactory::load($file_tmp);
+  
+          foreach($object->getWorksheetIterator() as $worksheet)
+          {
+  
+              $highestRow = $worksheet->getHighestRow();
+              $highestColumn = $worksheet->getHighestColumn();
+
+              $getHighestDataColumn = $worksheet->getHighestDataColumn();
+             
+
+                $xls = PHPExcel_IOFactory::load($file_tmp);
+                $xls->setActiveSheetIndex(0);
+                $sheet = $xls->getActiveSheet();
+
+                 $highestRow;
+
+                
+              for($row=0; $row<=$highestRow; $row++)
+              {
+  
+                  $nim = $worksheet->getCellByColumnAndRow(0, $row)->getValue();
+                  $nama = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
+                  $angkatan = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
+
+                 // $angkatan2 = $xls->getActiveSheet()->getCellByColumnAndRow(1, $row)->getCalculatedValue();
+
+                 $rowData[] = $sheet->rangeToArray('A' . $row . ':' . $highestColumn . $row,
+                                    NULL,
+                                    TRUE,
+                                    FALSE);
+
+
+
+              } 
+  
+          }
+          
+        //   echo "<pre>";
+        //   print_r($rowData);
+        //   die;
+         
+
+          foreach($rowData as $key => $k){
+
+           
+
+            if($k[0][0]!='nik' and $k[0][0]!='NIK' and $k[0][0]!=''){
+
+               
+         
+               
+
+                $nik = $k[0][1];
+               
+                $status = $k[0][4];
+                $tanggungan = $k[0][6];
+
+                $data_kar = $this->db->query("select kar_id from kar_master where kar_nik='".$nik."'")->row();
+              
+
+                $data_simpan = array(
+                   
+                   // 'nik'=>$nik,
+                   
+                    'pajak_status'=>$status,
+                    'pajak_tanggungan'=>$tanggungan,
+                  
+                   
+
+
+                );
+
+                    $this->db->where('kar_id',$data_kar->kar_id);
+                    $this->db->update('kar_detail',$data_simpan);
+                
+               
+
+            }
+
+          }
+
+              $message = array(
+              'message'=>'<div class="alert alert-success">Import file Suksess</div>',
+          );
+           $this->session->set_flashdata($message);
+          redirect('master/karyawan');
+
+
+      
+            
+       
+
+
+      }
+      else
+      {
+
+        echo "gagal";
+        //    $message = array(
+        //       'message'=>'<div class="alert alert-danger">Import file gagal, coba lagi</div>',
+        //   );
+          
+        //   $this->session->set_flashdata($message);
+        //   redirect('import');
+      }
     }
 
 

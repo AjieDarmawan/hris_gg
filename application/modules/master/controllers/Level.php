@@ -48,7 +48,7 @@ class Level extends CI_Controller
             $row = array();
             $row[] = $no;
             $row[] = $data_Level->lvl_nm;
-           	$row[] = $edit." ".$delete;
+            $row[] = "";
 
             $data[] = $row;
         }

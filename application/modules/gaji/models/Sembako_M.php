@@ -31,17 +31,15 @@ class Sembako_M extends CI_Model
 
          $this->db->select('kar_detail.*,kar_master.kar_nik,kar_master.kar_nm,');
         //$this->db->select('*');
-		
+        
         $this->db->join('kar_detail', 'kar_detail.kar_id = kar_master.kar_id', 'left');
         $this->db->from($this->table);
         
-        $this->db->where('DATE_ADD(kar_detail.kar_dtl_tgl_joi, INTERVAL "3" MONTH) >=','CURDATE()');
-
-       
-
-
+       // $this->db->where('DATE_ADD(kar_detail.kar_dtl_tgl_joi, INTERVAL "3" MONTH) >=','CURDATE()');
 
         $this->db->where('kar_detail.kar_dtl_typ_krj !=','Resign');
+
+        
         $i = 0;
         foreach ($this->column_search as $item) // loop kolom 
         {
@@ -87,14 +85,14 @@ class Sembako_M extends CI_Model
 
     public function count_all()
     {
-        $this->db->select('kar_detail.*,kar_master.kar_nik,kar_master.kar_nm,DATE_ADD(kar_detail.kar_dtl_tgl_joi, INTERVAL "3" MONTH) as bulan_tiga');
+        $this->db->select('kar_detail.*,kar_master.kar_nik,kar_master.kar_nm');
         //$this->db->select('*');
-		
+        
         $this->db->join('kar_detail', 'kar_detail.kar_id = kar_master.kar_id', 'left');
         $this->db->from($this->table);
 
         $this->db->where('kar_detail.kar_dtl_typ_krj !=','Resign');
-       
+      //  $this->db->where('DATE_ADD(kar_detail.kar_dtl_tgl_joi, INTERVAL "3" MONTH) >=','CURDATE()');
         return $this->db->count_all_results();
     }
 

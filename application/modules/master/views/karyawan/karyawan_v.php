@@ -9,6 +9,11 @@
     <div class="row">
         <div class="col-md-12">
             <a class="btn btn-primary mb-2" href="<?= base_url('master/karyawan/tambah'); ?>">Tambah</a>
+
+            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#upload_excel">Upload Excel</button>
+            <br>
+
+
             <div mb-2>
                 <!-- Menampilkan flashh data (pesan saat data berhasil disimpan)-->
                 <?php $this->load->view('layouts/alert'); ?>
@@ -142,3 +147,48 @@ $(document).ready(function() {
 
 });
 </script>
+
+
+
+<!-- Modal -->
+<div id="upload_excel" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+
+
+            <div class="modal-content">
+                <div class="modal-header bg-primary">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i></span>
+                    </button>
+                    <h4 class="modal-title" id="modalLabel"><i class="fa fa-plus" aria-hidden="true"></i> Form Perubahan Status</h4>
+
+                </div>
+                <div class="modal-body">
+                    <form role="form" action="<?php echo base_url('master/karyawan/upload_excel') ?>" method="post" enctype="multipart/form-data">
+                        <div class="row">
+                            <div>
+                               
+
+                                <input class="form-control form-control-sm" id="formFileSm" name="file" type="file">
+                                Upload Data Listrik
+                                <label>Format Excel</label>
+                                <a href="<?php echo base_url('assets/berkas/insentif.xlsx')?>" class="">Format Excel . xls</a>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" name="bsave" class="btn btn-primary px-4">Simpan</button>
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+</div>

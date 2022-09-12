@@ -34,7 +34,13 @@ class Pajak_M extends CI_Model
         $this->db->join('kar_detail', 'kar_detail.kar_id = kar_master.kar_id', 'left');
         $this->db->from($this->table);
 
-        $this->db->where('kar_detail.kar_dtl_typ_krj !=','Resign');
+        //$this->db->where('kar_detail.kar_dtl_typ_krj !=','Resign');
+
+        
+       // $this->db->where('kar_master.kar_id','433');
+
+        $this->db->where('kar_master.kar_nik !=','SG.0011.2003');
+        
         $i = 0;
         foreach ($this->column_search as $item) // loop kolom 
         {
@@ -87,6 +93,8 @@ class Pajak_M extends CI_Model
         $this->db->from($this->table);
 
         $this->db->where('kar_detail.kar_dtl_typ_krj !=','Resign');
+
+         $this->db->where('kar_master.kar_nik !=','SG.0011.2003');
         return $this->db->count_all_results();
     }
 
@@ -105,6 +113,8 @@ class Pajak_M extends CI_Model
         $this->db->from($this->table);
 
         $this->db->where('kar_detail.kar_dtl_typ_krj !=','Resign');
+
+         $this->db->where('kar_master.kar_nik !=','SG.0011.2003');
 
         $query = $this->db->get();
         return $query->result();

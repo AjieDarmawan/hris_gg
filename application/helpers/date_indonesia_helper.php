@@ -97,3 +97,49 @@ function dateDifference($date_1 , $date_2 , $differenceFormat = '%a' )
     
 }
 
+function educrypt($crypt = array())
+    {
+        $output = false;
+        $encrypt_method = "AES-256-CFB8";
+
+
+        if (is_array($crypt)) {
+
+
+
+            if ((isset($crypt['cid']) && $crypt['cid'] <> '') && (isset($crypt['secret']) && $crypt['secret'] <> '')) {
+
+
+                $secret_f = $crypt['cid'];
+                $secret_s = $crypt['secret'];
+
+                if (isset($crypt['data']) && is_string($crypt['data'])) {
+
+
+
+
+                    $string = $crypt['data'];
+                    if (is_string($secret_f) && is_string($secret_s)) {
+
+
+                        $key = hash('sha256', $secret_f);
+                        $iv = substr(hash('sha256', $secret_s), 0, 16);
+
+                        if (isset($crypt['action']) && $crypt['action'] <> '') {
+
+
+                            if ($crypt['action'] == 'encrypt') {
+                                $output = openssl_encrypt($string, $encrypt_method, $key, 0, $iv);
+                                $output = str_replace("=", $secret_f, base64_encode($output));
+                            } else if ($crypt['action'] == 'decrypt') {
+                                $output = openssl_decrypt(base64_decode(str_replace($secret_f, "=", $string)), $encrypt_method, $key, 0, $iv);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return $output;
+    }
+

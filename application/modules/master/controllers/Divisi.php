@@ -48,7 +48,7 @@ class Divisi extends CI_Controller
             $row = array();
             $row[] = $no;
             $row[] = $data_divisi->div_nm;
-           	$row[] = $edit." ".$delete;
+           	$row[] = "";
 
             $data[] = $row;
         }

@@ -8,6 +8,7 @@
 
                         <th>Nik</th>
                         <th>Nama</th>
+                        <th>Tgl Join</th>
                         <th>Divisi</th>
                         <th>Kantor</th>
                         <th>Harga</th>
@@ -21,18 +22,10 @@
                        
                         $no=1;
                         $tot_harga=0;
-                        foreach ($menikah as $m) {
+                        foreach ($tidak_dapat as $m) {
                             error_reporting(0);
 
-                           
-
-                            if ($m->kar_nik == 'SG.0675.2022') {
-                                $harga = 220000;
-                             }else{
-                                $harga = 110000;
-                             }
-
-                            $tot_harga += $harga;
+                            $tot_harga += 110000;
 
                             $div = $this->db->query('select d.div_nm,kt.ktr_nm from kar_master as k inner 
                             join div_master as d  on d.div_id = k.div_id 
@@ -42,11 +35,12 @@
                             <td><?php echo $no++;?></td>
                             <td><?php echo $m->kar_nik?></td>
                             <td><?php echo $m->kar_nm?></td>
+                            <td><?php echo date('d-M-Y',strtotime($m->kar_dtl_tgl_joi))?>
                             <td><?php echo $div->div_nm?></td>
                             <td><?php echo $div->ktr_nm?></td>
 
                             
-                            <td><?php echo number_format($harga)?></td>    
+                            <td><?php echo number_format(110000)?></td>    
                             </tr>
                            
                         <?php

@@ -9,8 +9,8 @@ class Paguyuban extends CI_Controller
     function __construct(){
 		parent::__construct();
 		if(!$this->session->userdata()['pegawai']){
-			redirect('auth');
-		}
+            redirect('auth');
+        }
         $this->load->model(array('Paguyuban_M'));
 		
     }

@@ -1,21 +1,21 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Komponen_gaji_model extends CI_Model
+class Kar_Bpjs_M extends CI_Model
 {
 
 
     //set nama tabel yang akan kita tampilkan datanya
-    var $table = 'absen.kar_master';
+    var $table = 'payroll.kar_bpjs';
     //set kolom order, kolom pertama saya null untuk kolom edit dan hapus
-    var $column_order = array('kar_nm','kar_nik',null,null,null,null,null,null,null,null,null);
+    var $column_order = array('bulan','nik',null,null,null,null);
 
-    var $column_search = array('kar_nm','kar_nik');
+    var $column_search = array('bulan','nik');
     // default order 
-    var $order = array('kar_master.kar_id' => 'desc');
+    var $order = array('id_kar_bpjs' => 'desc');
 
 
     public $kar_id;
-    public $kar_nm;
+    public $bulan;
     
 
 
@@ -29,18 +29,13 @@ class Komponen_gaji_model extends CI_Model
     private function _get_datatables_query()
     {   
 
-         $this->db->select('payroll.komponen_gaji.*,kar_master.kar_nik,kar_master.kar_nm,kar_master.kar_id');
+         $this->db->select('*');
         //$this->db->select('*');
-		$this->db->join('payroll.komponen_gaji', 'kar_master.kar_id = payroll.komponen_gaji.kar_id', 'left');
-        $this->db->join('kar_detail', 'kar_detail.kar_id = kar_master.kar_id', 'left');
+		
+        $this->db->join('kar_master', 'kar_master.kar_id = payroll.kar_bpjs.kar_id', 'inner');
         $this->db->from($this->table);
 
-        $this->db->where('kar_detail.kar_dtl_typ_krj !=','Resign');
-
-         $this->db->where('kar_master.kar_id','433');
-
-
-
+      
         $i = 0;
         foreach ($this->column_search as $item) // loop kolom 
         {
@@ -86,12 +81,14 @@ class Komponen_gaji_model extends CI_Model
 
     public function count_all()
     {
-        $this->db->select('payroll.komponen_gaji.*,kar_master.kar_nik,kar_master.kar_nm');
-		$this->db->join('payroll.komponen_gaji', 'kar_master.kar_id = payroll.komponen_gaji.kar_id', 'left');
-        $this->db->join('kar_detail', 'kar_detail.kar_id = kar_master.kar_id', 'left');
+       
+        $this->db->select('*');
+        //$this->db->select('*');
+		
+        $this->db->join('kar_master', 'kar_master.kar_id = payroll.kar_bpjs.kar_id', 'inner');
         $this->db->from($this->table);
 
-        $this->db->where('kar_detail.kar_dtl_typ_krj !=','Resign');
+       
         return $this->db->count_all_results();
     }
 
@@ -115,21 +112,21 @@ class Komponen_gaji_model extends CI_Model
     {
         // $post = $this->input->post();
         // $this->kar_id = uniqid();
-        // $this->kar_nm = $divisi;
+        // $this->bulan = $divisi;
         $data = array(
-            'kar_nm'=>$divisi,
+            'bulan'=>$divisi,
         );
         return $this->db->insert('div_master', $data);
     }
 
-    public function update($kar_id,$kar_nm)
+    public function update($kar_id,$bulan)
     {
         // $post = $this->input->post();
         // $this->kar_id = $kar_id;
-        // $this->kar_nm = $kar_nm;
+        // $this->bulan = $bulan;
 
         $data = array(
-            'kar_nm'=>$kar_nm,
+            'bulan'=>$bulan,
         );
 
        

@@ -2,7 +2,7 @@
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Insentif extends CI_Controller
+class Pajak_thr extends CI_Controller
 {
 
 
@@ -11,7 +11,7 @@ class Insentif extends CI_Controller
 		if(!$this->session->userdata()['pegawai']){
             redirect('auth');
         }
-        $this->load->model(array('Insentif_M'));
+        $this->load->model(array('Pajak_thr_M'));
 		
     }
 
@@ -23,9 +23,9 @@ class Insentif extends CI_Controller
     {
       
 
-        //$data["divisi"] = $this->Insentif_M->getAll();
-        $data["title"] = "List Data Master Insentif";
-        $this->template->load('template','insentif/insentif_v',$data);
+        //$data["divisi"] = $this->Pajak_thr_M->getAll();
+        $data["title"] = "List Data Master pajak_thr";
+        $this->template->load('template','pajak_thr/pajak_thr_v',$data);
      
     }
 
@@ -33,11 +33,11 @@ class Insentif extends CI_Controller
     public function ajax_list()
     {
         header('Content-Type: application/json');
-        $list = $this->Insentif_M->get_datatables();
+        $list = $this->Pajak_thr_M->get_datatables();
         $data = array();
         $no = $this->input->post('start');
         //looping data mahasiswa
-        foreach ($list as $data_insentif) {
+        foreach ($list as $data_pajak_thr) {
 
 
          
@@ -46,24 +46,15 @@ class Insentif extends CI_Controller
             $no++;
             $row = array();
             $row[] = $no;
-            $row[] = $data_insentif->kar_nik;
-            $row[] = $data_insentif->kar_nm;
-            $row[] = date('M-Y',strtotime($data_insentif->bulan));
-            $row[] = date('M-Y',strtotime($data_insentif->bulan_dibayarkan));
-            $row[] = number_format($data_insentif->jumlah);
-           
-          
-           
-          
-            
-          
-
+            $row[] = $data_pajak_thr->nik;
+            $row[] = $data_pajak_thr->kar_nm;
+            $row[] = number_format($data_pajak_thr->jumlah);
             $data[] = $row;
         }
         $output = array(
             "draw" => $this->input->post('draw'),
-            "recordsTotal" => $this->Insentif_M->count_all(),
-            "recordsFiltered" => $this->Insentif_M->count_filtered(),
+            "recordsTotal" => $this->Pajak_thr_M->count_all(),
+            "recordsFiltered" => $this->Pajak_thr_M->count_filtered(),
             "data" => $data,
         );
         //output to json format
@@ -151,21 +142,20 @@ class Insentif extends CI_Controller
                 $data_simpan = array(
                     'kar_id'=> $insert_nik->kar_id,
                     'nik'=>$nik,
-                    //'nama'=>$nama,
+                    'kar_nm'=>$nama,
                     'jumlah'=>$jumlah,
                     'crdt'=>date('Y-m-d H:i:s'),
-                    'bulan'=>$bulan,
-                    'bulan_dibayarkan'=>$bulan_dibayarkan,
+                    
 
 
                 );
 
-                $cek_update = $this->db->query("select * from payroll.insentif where nik='".$nik."'")->row();
+                $cek_update = $this->db->query("select * from payroll.pajak_thr where nik='".$nik."'")->row();
 
                 if($cek_update){
-                    $this->db->update('payroll.insentif',$data_simpan,array('nik',$nik));
+                    $this->db->update('payroll.pajak_thr',$data_simpan,array('nik',$nik));
                 }else{
-                    $this->db->insert('payroll.insentif',$data_simpan);
+                    $this->db->insert('payroll.pajak_thr',$data_simpan);
                 }
                
 
@@ -177,7 +167,7 @@ class Insentif extends CI_Controller
               'message'=>'<div class="alert alert-success">Import file Suksess</div>',
           );
            $this->session->set_flashdata($message);
-          redirect('gaji/insentif');
+          redirect('gaji/pajak_thr');
 
 
       

@@ -16,7 +16,25 @@
 
              
             <a class="btn btn-primary btn-sm" href="<?php echo base_url('gaji/bpjs/croscek') ?>">Data Crosceek</a>
-          
+  
+            <?php 
+            $bulan_where = date('m-Y');
+                $cek_bpjs = $this->db->query('select * from payroll.bpjs where bulan="'.$bulan_where.'" limit 1')->row();
+                if($cek_bpjs){
+                        ?>
+                                 <button class="btn btn-success btn-sm" disabled  >Sudah DI Acc Divisi Keuangan</button>
+                        <?php
+                }else{
+                    ?>
+                                  <a href="<?php echo base_url('gaji/bpjs/bpjs_insert')?>" onclick="return confirm('Apakah Kamu Yakin?')" class="btn btn-success btn-sm">Mengetahui Divisi Keuangan</a>
+
+                    <?php
+                    
+
+                }
+            
+            ?>
+
 
 
             <div class="card">

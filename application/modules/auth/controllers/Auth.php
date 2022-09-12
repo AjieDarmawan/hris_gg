@@ -30,28 +30,44 @@ class Auth extends CI_Controller
     // log the user in
     public function login()
     {   
-        
-       
+        $username =  $this->input->post('username');
+        $password = $this->input->post('password');
+        if($username=='SG00212004' || $username=='SG05842020' || $username=='SG06172021' || $username=='SG.0037.2007'){
             $user = $this->auth_model->login(
-                $this->input->post('username'), 
-                $this->input->post('password'));
-             
-          
+                $username, 
+                 $password);
+              
+           
+  
+             $pegawai = $this->Pegawai_model->select_by_id($user['kar_id']);
  
-            $pegawai = $this->Pegawai_model->select_by_id($user['kar_id']);
+             // echo "<pre>";
+             // print_r($pegawai);
+             //     die;
 
-            // echo "<pre>";
-            // print_r($pegawai);
-            //     die;
+             
+ 
+ 
+             if($user){
+                 $this->session->set_userdata(array('pegawai'=>$pegawai));
+                 redirect('pegawai');
 
 
-            if($user){
-                $this->session->set_userdata(array('pegawai'=>$pegawai));
+             }else{
+                echo "<script> alert('Password Anda Salah');</script>";
+                echo "<script>window.location.href = 'index';</script>";
+             }
+        }else{
+          // redirect('auth');
+          // redirect('auth');
 
-                redirect('pegawai');
-            }else{
-                redirect('auth');
-            }
+         
+           echo "<script> alert('User ini Tidak Berhak Untuk Akses Halaman ini');</script>";
+           echo "<script>window.location.href = 'index';</script>";
+          
+        }
+       
+           
 
             
     }

@@ -17,21 +17,44 @@
             <?php
             $menikah = $this->db->query('select count(k.kar_nm) as total , k.kar_nm,DATE_ADD(d.kar_dtl_tgl_joi, INTERVAL "3" MONTH) as waktu,CURDATE() from kar_master as k
             inner join kar_detail as d on k.kar_id = d.kar_id where kar_dtl_sts_nkh="K" and kar_dtl_typ_krj != "Resign" 
-            and DATE_ADD(d.kar_dtl_tgl_joi, INTERVAL "3" MONTH) <=  CURDATE() and kar_nik not in ("SG.0060.2010","SG.0035.2007","SG.0410.2017","SG.0205.2014","SG.0247.2015","SG.0186.2014","SG.0273.2015")')->row();
+            and DATE_ADD(d.kar_dtl_tgl_joi, INTERVAL "3" MONTH) <=  CURDATE() and kar_nik not in ("SG.0060.2010","SG.0035.2007","SG.0410.2017","SG.0205.2014","SG.0247.2015",
+        "SG.0186.2014","SG.0273.2015","SG.0226.2015","SG.0608.2021","SG.0664.2022","SG.0665.2022","SG.0666.2022","SG.0667.2022","SG.0668.2022","SG.0663.2022","SG.0688.2022","SG.0689.2022") order by k.ktr_id asc')->row();
 
             $belum_menikah = $this->db->query('select count(k.kar_nm) as total , k.kar_nm,DATE_ADD(d.kar_dtl_tgl_joi, INTERVAL "3" MONTH) as waktu,CURDATE() from kar_master as k
             inner join kar_detail as d on k.kar_id = d.kar_id where kar_dtl_sts_nkh="TK" and kar_dtl_typ_krj != "Resign" 
-            and DATE_ADD(d.kar_dtl_tgl_joi, INTERVAL "3" MONTH) <=  CURDATE()')->row();
+            and DATE_ADD(d.kar_dtl_tgl_joi, INTERVAL "3" MONTH) <=  CURDATE() and kar_nik not in ("SG.0667.2022","SG.0668.2022","SG.0663.2022","SG.0688.2022","SG.0689.2022") order by k.ktr_id asc')->row();
             ?>
 
             <a class="btn btn-primary btn-sm" href="<?php echo base_url('gaji/sembako/belum_menikah') ?>">List Data Belum Menikah</a>
             <a class="btn btn-success btn-sm" href="<?php echo base_url('gaji/sembako/menikah') ?>">List Data Menikah</a>
+
+            <a class="btn btn-danger btn-sm" href="<?php echo base_url('gaji/sembako/belum_dapet') ?>">List Data Belum Dapat Sembako</a>
+           
+            <?php 
+            $bulan_where = date('m-Y');
+                $cek_sembako = $this->db->query('select * from payroll.sembako where bulan="'.$bulan_where.'" limit 1')->row();
+                if($cek_sembako){
+                        ?>
+                             <button class="btn btn-success btn-sm" disabled  >Sudah DI Acc Divisi Keuangan</button>
+                              <a class="btn btn-danger btn-sm" href="<?php echo base_url('gaji/sembako/ga_dapet') ?>">List Data Tidak Dapat Sembako</a>
+                        <?php
+                }else{
+                    ?>
+                         <a href="<?php echo base_url('gaji/sembako/sembako_insert')?>" onclick="return confirm('Apakah Kamu Yakin?')" class="btn btn-success btn-sm">Mengetahui Divisi Keuangan</a>
+                    <?php
+                    
+
+                }
+            
+            ?>
+           
+           
             <br>
             Jumlah Belum Menikah : <?php echo $belum_menikah->total; ?> <br>
             Jumlah Sudah Menikah : <?php echo $menikah->total; ?>
 
 
-
+           
 
             <div class="card">
                 <div class="card-body">

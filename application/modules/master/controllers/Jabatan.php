@@ -48,7 +48,7 @@ class Jabatan extends CI_Controller
             $row[] = $no;
             $row[] = $data_jbt->jbt_nm;
             $row[] = $data_jbt->div_nm;
-           	$row[] = $edit." ".$delete;
+            $row[] = "";
 
             $data[] = $row;
         }
