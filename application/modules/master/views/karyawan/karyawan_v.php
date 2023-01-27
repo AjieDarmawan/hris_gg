@@ -9,13 +9,12 @@
     <div class="row">
         <div class="col-md-12">
             <a class="btn btn-primary mb-2" href="<?= base_url('master/karyawan/tambah'); ?>">Tambah</a>
-
-            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#upload_excel">Upload Excel</button>
-            <br>
-
-
             <div mb-2>
                 <!-- Menampilkan flashh data (pesan saat data berhasil disimpan)-->
+
+                 <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#upload_excel">Upload Excel</button>
+            <br>
+
                 <?php $this->load->view('layouts/alert'); ?>
             </div>
             <div class="card">
@@ -39,6 +38,10 @@
 
 
                                     <th>Status Perkawinan</th>
+
+
+                                    <th>Status Pajak</th>
+                                    <th>Status Tanggungan</th>
                                    
                                     <!-- <th>No Wa</th>
 
@@ -147,6 +150,7 @@ $(document).ready(function() {
 
 });
 </script>
+
 
 
 

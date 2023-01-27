@@ -21,6 +21,9 @@ class Paguyuban extends CI_Controller
     // redirect if needed, otherwise display the user list
     public function index()
     {
+
+        $data['kar_data'] = $this->db->query("select  k.kar_id,k.kar_nm,k.kar_nik from kar_master as k inner join kar_detail as d on k.kar_id = d.kar_id 
+        where d.kar_dtl_typ_krj != 'Resign' order by k.kar_nm asc")->result();
       
 
         //$data["divisi"] = $this->Paguyuban_M->getAll();
@@ -146,7 +149,7 @@ class Paguyuban extends CI_Controller
                 $dibayarkan = $k[0][3];
                
 
-                $insert_nik = $this->db->query("select * from kar_master where kar_nik='".$nik."'")->row();
+                $insert_nik = $this->db->query("select * from kar_master where kar_nik='".$nik."'  ")->row();
               
 
                 $data_simpan = array(
@@ -161,7 +164,7 @@ class Paguyuban extends CI_Controller
 
                 );
 
-                $cek_update = $this->db->query("select * from payroll.paguyuban where nik='".$nik."'")->row();
+                $cek_update = $this->db->query("select * from payroll.paguyuban where nik='".$nik."' and bulan = '".$bulan."'")->row();
 
                 if($cek_update){
                     $this->db->update('payroll.paguyuban',$data_simpan,array('nik',$nik));
@@ -338,6 +341,31 @@ class Paguyuban extends CI_Controller
         //   $this->session->set_flashdata($message);
         //   redirect('import');
       }
+    }
+
+
+    function insert_paguyuban_pinjam(){
+        $bulan = $this->input->post('bulan');
+        $kar_id_yg_dipinjam_namanya = $this->input->post('kar_id_yg_dipinjam_namanya');
+        $kar_id_pinjam = $this->input->post('kar_id_pinjam');
+        $dibayarkan = $this->input->post('dibayarkan');
+        $angsuran = $this->input->post('angsuran');
+
+        $nik = $this->db->query("select kar_nik from kar_master where kar_id='".$kar_id_pinjam."'")->row();
+
+        $data_simpan = array(
+            'bulan'=>$bulan,
+            'kar_id_pinjem_namanya'=>$kar_id_yg_dipinjam_namanya,
+            'kar_id'=>$kar_id_pinjam,
+            'dibayarkan'=>$dibayarkan,
+            'angsuran'=>$angsuran,
+            'crdt'=>date('Y-m-d'),
+            'nik'=>$nik->kar_nik,
+        );
+
+        $this->db->insert('payroll.paguyuban_pinjam',$data_simpan);
+
+        redirect('gaji/paguyuban');
     }
 
     

@@ -160,7 +160,7 @@ class Insentif extends CI_Controller
 
                 );
 
-                $cek_update = $this->db->query("select * from payroll.insentif where nik='".$nik."'")->row();
+                $cek_update = $this->db->query("select * from payroll.insentif where nik='".$nik."' and bulan_dibayarkan ='".$bulan_dibayarkan."' ")->row();
 
                 if($cek_update){
                     $this->db->update('payroll.insentif',$data_simpan,array('nik',$nik));

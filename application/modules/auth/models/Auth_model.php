@@ -8,9 +8,12 @@ class Auth_model extends CI_Model
     {
 
          $user = $this->db->select('*')
-        ->from('acc_master')
-        ->where('acc_username', $username)
-        ->where('acc_sts', 'A')
+        ->from('acc_master as u')
+         ->join('kar_master as k','k.kar_id = u.kar_id')
+        ->join('kar_detail as d','d.kar_id = u.kar_id')
+        ->where('u.acc_username', $username)
+         ->where('u.acc_password', $password)
+        ->where('u.acc_sts', 'A')
         //->or_where('email', $username)
         ->limit(1)
         ->get()

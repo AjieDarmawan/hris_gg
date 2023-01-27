@@ -214,9 +214,11 @@ class Absen extends CI_Controller
       }
     }
 
+   
 
 
-    function jadwal(){
+
+     function jadwal(){
 
         $sess = $this->session->userdata();
         // echo "<pre>";
@@ -230,9 +232,7 @@ class Absen extends CI_Controller
         $level = $sess['pegawai']['kar_pvl'];
 
         
-         //$bulan = date('mY');
-         $bulan = '072021';
-
+         $bulan = date('mY');
       
         if($level=='A'){
             $data['jadwal'] = $this->db->query("select j.*,m.nama_karyawan from jadwal as j

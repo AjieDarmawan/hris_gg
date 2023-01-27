@@ -44,12 +44,12 @@ class Pajak extends CI_Controller
          //  $insentif = 0;
 
             //$dibayarkan = date('Y-m');
-            $dibayarkan = '2022-08';
+            $dibayarkan = '2022-09';
 
             //$bulan_where = date('m-Y');
-         $bulan_where = '08-2022';
+         $bulan_where = '09-2022';
 
-         $bulan_skrang = '08';
+         $bulan_skrang = '09';
          $tahun_sekarang = date('Y');
         $data = array();
         $no = $this->input->post('start');
@@ -863,12 +863,12 @@ class Pajak extends CI_Controller
          //  $insentif = 0;
 
             //$dibayarkan = date('Y-m');
-            $dibayarkan = '2022-08';
+            $dibayarkan = '2022-09';
 
             //$bulan_where = date('m-Y');
-         $bulan_where = '08-2022';
+         $bulan_where = '09-2022';
 
-         $bulan_skrang = '08';
+         $bulan_skrang = '09';
          $tahun_sekarang = date('Y');
 
         foreach($data_kar as $data_bpjs){
@@ -940,7 +940,7 @@ class Pajak extends CI_Controller
 
 
 
-            $total_gaji = intval($uang_tambahan+$gaji_pokok_en+$t_fungsional_en+$t_struktural_en+$t_kinerja_en+$t_umum_en);
+            $total_gaji = intval($t_dinas_lk+$uang_tambahan+$gaji_pokok_en+$t_fungsional_en+$t_struktural_en+$t_kinerja_en+$t_umum_en);
 
 
             $tunjangan =  $t_struktural_en;
@@ -1485,7 +1485,7 @@ class Pajak extends CI_Controller
                 'kar_nik'=>$data_bpjs->kar_nik,
                 'kar_nm'=>$data_bpjs->kar_nm,
                 // 'bulan'=>date('m-Y'),
-                'bulan'=>'08-2022',
+                'bulan'=>'09-2022',
                 'npwp'=>$data_bpjs->kar_dtl_no_npw,
                 'anak'=>$data_bpjs->kar_dtl_jml_ank,
                 'status_perkawinan'=>$data_bpjs->kar_dtl_sts_nkh,
@@ -1597,7 +1597,7 @@ class Pajak extends CI_Controller
                     'kar_nm'=> $kar_nm,
                     'kar_nik'=>$nik,
                     'nominal'=>$jumlah,
-                    'bulan'=>'08-2022',
+                    'bulan'=>'09-2022',
                  
 
 

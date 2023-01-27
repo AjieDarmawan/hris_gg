@@ -28,11 +28,11 @@ class Auth extends CI_Controller
     }
 
     // log the user in
-    public function login()
+     public function login()
     {   
         $username =  $this->input->post('username');
         $password = $this->input->post('password');
-        if($username=='SG00212004' || $username=='SG05842020' || $username=='SG06172021' || $username=='SG.0037.2007'){
+        if($username=='SG00212004' || $username=='SG05842020' || $username=='SG06172021'|| $username=='SG00372007' ||  $username=='SG04472018'){
             $user = $this->auth_model->login(
                 $username, 
                  $password);
@@ -44,18 +44,15 @@ class Auth extends CI_Controller
              // echo "<pre>";
              // print_r($pegawai);
              //     die;
-
-             
  
  
              if($user){
                  $this->session->set_userdata(array('pegawai'=>$pegawai));
+ 
                  redirect('pegawai');
-
-
              }else{
-                echo "<script> alert('Password Anda Salah');</script>";
-                echo "<script>window.location.href = 'index';</script>";
+                   echo "<script> alert('Password Anda Salah');</script>";
+                   echo "<script>window.location.href = 'index';</script>";
              }
         }else{
           // redirect('auth');

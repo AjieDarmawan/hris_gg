@@ -814,7 +814,7 @@ class Bpjs extends CI_Controller
                         'kar_nik'=>$k->kar_nik,
                         'kar_nama'=>$k->kar_nm,
                         // 'bulan'=>date('m-Y'),
-                        'bulan'=>'08-2022',
+                        'bulan'=>'09-2022',
                         'total_gaji'=>$total_gaji_en,
                         'gaji_bpjs'=>$total_gaji_bpjs,
                         
@@ -840,7 +840,7 @@ class Bpjs extends CI_Controller
                         'kar_nik'=>$k->kar_nik,
                         'kar_nama'=>$k->kar_nm,
                        // 'bulan'=>date('m-Y'),
-                         'bulan'=>'08-2022',
+                         'bulan'=>'09-2022',
                         'total_gaji'=>$total_gaji_en,
                         'gaji_bpjs'=>$total_gaji_bpjs,
                         
@@ -860,6 +860,7 @@ class Bpjs extends CI_Controller
                     );
                 }
                
+            
 
                 $simpan = $this->db->insert('payroll.bpjs',$data_array);
 

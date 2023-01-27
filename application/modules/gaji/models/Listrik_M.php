@@ -34,6 +34,8 @@ class Listrik_M extends CI_Model
 		
         $this->db->join('kar_master', 'kar_master.kar_id = payroll.listrik.kar_id', 'inner');
         $this->db->from($this->table);
+        $this->db->order_by('bulan','desc');
+
 
       
         $i = 0;

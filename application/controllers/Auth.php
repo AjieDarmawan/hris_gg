@@ -14,8 +14,7 @@ class Auth extends CI_Controller
     // redirect if needed, otherwise display the user list
     public function index()
     {
-        echo "tes";
-        die;
+       
         redirect('auth/logout', 'refresh');
     }
 

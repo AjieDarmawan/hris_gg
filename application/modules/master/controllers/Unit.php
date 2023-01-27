@@ -48,7 +48,7 @@ class Unit extends CI_Controller
             $row = array();
             $row[] = $no;
             $row[] = $data_Unit->unt_nm;
-            $row[] = "";
+           	    $row[] = "";
 
             $data[] = $row;
         }

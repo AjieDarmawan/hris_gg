@@ -165,7 +165,7 @@ class Listrik extends CI_Controller
 
                 );
 
-                $cek_update = $this->db->query("select * from payroll.listrik where nik='".$nik."'")->row();
+                $cek_update = $this->db->query("select * from payroll.listrik where nik='".$nik."' and bulan = '".$bulan."'")->row();
 
                 if($cek_update){
                     $this->db->update('payroll.listrik',$data_simpan,array('nik',$nik));

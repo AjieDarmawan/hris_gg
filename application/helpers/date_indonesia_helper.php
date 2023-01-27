@@ -97,6 +97,7 @@ function dateDifference($date_1 , $date_2 , $differenceFormat = '%a' )
     
 }
 
+
 function educrypt($crypt = array())
     {
         $output = false;

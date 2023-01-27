@@ -76,18 +76,19 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	// 'hostname' => 'cb.web.id',
-	// 'username' => 'absen',
-	// 'password' => '2014sukses',
-	// 'database' => 'absen',
-	// 'dbdriver' => 'mysqli',
 
-
-	'hostname' => 'localhost',
-	'username' => 'root',
-	'password' => '',
+		'hostname' => 'cb.web.id',
+	'username' => 'payroll',
+	'password' => 'gilland5uk5e5',
 	'database' => 'absen',
 	'dbdriver' => 'mysqli',
+
+	
+	// 'hostname' => '103.241.179.9',
+	// 'username' => 'hrd_gg',
+	// 'password' => '20215uk5e5',
+	// 'database' => 'hrd_gg',
+	// 'dbdriver' => 'mysqli',
 
 
 	'dbprefix' => '',

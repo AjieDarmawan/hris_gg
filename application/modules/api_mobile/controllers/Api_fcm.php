@@ -23,38 +23,46 @@ class Api_fcm extends CI_Controller
 
 
     function ceklatlong(){
-        $timezone = new DateTimeZone('Asia/Jakarta');
-         $date = new DateTime();
-         $date->setTimeZone($timezone);
-         date_add($date, date_interval_create_from_date_string('6 minutes'));
-         $waktu = date_format($date, 'Y-m-d H:i:s');
- 
- 
- 
-        
-         $lat = $this->input->post('lat');
-         $long = $this->input->post('long');
-         $kar_id = $this->input->post('kar_id');
- 
- 
-         $data_insert = array(
-             'lat'=>$lat,
-             'long'=>$long,
-             'kar_id'=>$kar_id,
-             'tanggal'=>$waktu,
-         );
- 
+       $timezone = new DateTimeZone('Asia/Jakarta');
+        $date = new DateTime();
+        $date->setTimeZone($timezone);
+        date_add($date, date_interval_create_from_date_string('6 minutes'));
+        $waktu = date_format($date, 'Y-m-d H:i:s');
+
+
+
+       
+        $lat = $this->input->post('lat');
+        $long = $this->input->post('long');
+        $kar_id = $this->input->post('kar_id');
+
+
+        $data_insert = array(
+            'lat'=>$lat,
+            'long'=>$long,
+            'kar_id'=>$kar_id,
+            'tanggal'=>$waktu,
+        );
+
+       $cek_kar = $this->db->query("select * from cek_posisi where kar_id = ".$kar_id."")->row();
+
+       if($cek_kar){
+         $q = $this->db->update('cek_posisi',$data_insert,array('kar_id'=>$kar_id));
+       }else{
          $q = $this->db->insert('cek_posisi',$data_insert);
- 
-         if($q){
-             $datajson['status'] = 200;
-             $datajson['message'] = "success";
-         }else{
-             $datajson['status'] = 404;
-             $datajson['message'] = "gagal";
-         }
-         echo json_encode($datajson);
-     }
+       }
+
+       
+
+        if($q){
+            $datajson['status'] = 200;
+            $datajson['message'] = "sukkses";
+        }else{
+            $datajson['status'] = 404;
+            $datajson['message'] = "gagal";
+        }
+        echo json_encode($datajson);
+    }
 
    
 

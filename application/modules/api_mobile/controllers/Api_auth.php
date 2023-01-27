@@ -16,8 +16,8 @@ class Api_auth extends CI_Controller
     }
 
     function kar_tampil_id($kar_id)
-	{
-		$sql = "SELECT kar_master.kar_nik,
+    {
+        $sql = "SELECT kar_master.kar_nik,
         kar_master.kar_nik,
         kar_master.kar_nm,
         kar_master.kar_tgl_lahir,
@@ -52,9 +52,9 @@ class Api_auth extends CI_Controller
         kar_detail.kar_id=kar_master.kar_id AND
         kar_master.kar_id='$kar_id'
         ORDER BY kar_master.kar_id";
-		$query = $this->db->query($sql)->row();
+        $query = $this->db->query($sql)->row();
         return $query;
-	}
+    }
 
 
     
@@ -65,6 +65,53 @@ class Api_auth extends CI_Controller
         $user = $this->auth_model->login(
             $this->input->post('username'), 
             $this->input->post('password'));
+
+        // echo "<pre>";
+        // print_r($user);
+        // die;
+
+            $img = "https://cb.web.id/module/profile/img/".$user['acc_img'];
+
+            if($user){
+                $data = array(
+                    'status'=>200,
+                    'message'=>'success',
+                    'img'=>$img,
+                    'data'=>$user,
+                );
+            }else{
+
+                $data = array(
+                    'status'=>404,
+                    'message'=>'gagal',
+                    'img'=>"",
+                    'data'=>array(),
+                );
+
+            }
+
+            echo json_encode($data);
+
+
+           
+    }
+
+
+    public function login2()
+    {
+
+        $json = file_get_contents('php://input');
+        $data_json = json_decode($json, true);
+
+
+        // echo "<pre>";
+        // print_r($data_json);
+        // die;
+
+
+        $user = $this->auth_model->login(
+            $data_json['username'], 
+            $data_json['password']);
 
             if($user){
                 $data = array(
@@ -88,7 +135,25 @@ class Api_auth extends CI_Controller
            
     }
 
-    function users_detail(){
+   
+
+    // log the user out
+    public function logout()
+    {
+        $this->session->sess_destroy();
+        redirect('auth', false);
+    }
+
+    function error(){
+        $this->load->view('errors/html/error_404');
+    }
+    function tes(){
+
+        $this->load->view('layouts/template');
+
+    }
+
+     function users_detail(){
         $kar_id = $this->input->post('kar_id');
 
        $kar = $this->kar_tampil_id($kar_id);
@@ -96,7 +161,4 @@ class Api_auth extends CI_Controller
        echo json_encode($kar);
     }
 
-   
-
-  
 }

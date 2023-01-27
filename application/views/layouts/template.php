@@ -1838,7 +1838,7 @@
                     navLinks: true,
                     events: [
 
-                        <?php 
+                          <?php 
                             error_reporting(0);
                                  foreach($jadwal as $key => $j)
                                  {
@@ -1862,6 +1862,7 @@
                                        $title = $j;
                                    }
                              ?>
+
 
 
 

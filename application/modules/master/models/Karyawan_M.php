@@ -30,9 +30,11 @@ class Karyawan_M extends CI_Model
     {
         $this->db->select('*');
 		$this->db->join('kar_detail', 'kar_detail.kar_id = kar_master.kar_id', 'inner');
+       
+       
         $this->db->from($this->table);
 
-        $this->db->where('kar_detail.kar_dtl_typ_krj !=','Resign');
+         $this->db->where('kar_detail.kar_dtl_typ_krj !=','Resign');
 
 
         $i = 0;

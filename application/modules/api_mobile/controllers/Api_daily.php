@@ -11,7 +11,7 @@ class Api_daily extends CI_Controller
 		// if(!$this->session->userdata(['pegawai']['kar_pvl']=='U')){
 		// 	redirect('auth');
 		// }
-       $this->load->model(array('Api_M'));
+       $this->load->model(array('Api_daily_M'));
 		
     }
     
@@ -199,7 +199,7 @@ class Api_daily extends CI_Controller
 				'wfd_key'			=>'',
 				'kar_id'			=>$kar['id_karyawan'],
 				'wfd_nama'			=>$kar['nama_karyawan'],
-				'wfd_nomor'			=>'',
+				'wfd_nomor'			=>$nomor,
 				'wfd_username'		=>$username,
 				'wfd_status'		=>'1',
 				'wfd_lock'			=>'N',
@@ -332,6 +332,7 @@ class Api_daily extends CI_Controller
 	}
 
 	function detail_lihat(){
+        
 		//echo $nomor;
 
 
@@ -344,8 +345,10 @@ class Api_daily extends CI_Controller
         $nik_kantor = str_replace(".","",$kar['nik_kantor']);
 		$uniq = date('dmY');
 
-		 $nomor = $nik_kantor.$uniq;
-		$get_harian = $this->Daily_M->get_harian($nomor);
+		  $nomor = $nik_kantor.$uniq;
+
+        
+		$get_harian = $this->Api_daily_M->get_harian($nomor);
 		
         echo json_encode($get_harian);
 	}
@@ -363,8 +366,10 @@ class Api_daily extends CI_Controller
 
 		  $nomor = $nik_kantor.$uniq;
 
+		  
+
         
-		$get_harian = $this->Api_daily_M->get_harian($nomor);
+		$get_harian = $this->Api_daily_M->get_harian_groupby($nomor);
 		
         echo json_encode($get_harian);
 

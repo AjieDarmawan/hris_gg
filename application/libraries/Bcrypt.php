@@ -130,15 +130,6 @@ class Bcrypt {
 
     return $output;
   }
-
-
-  public function abs_tampil_kar($kar_id,$abs_tgl_masuk)
-	{
-		$sql = "SELECT * FROM abs_master WHERE kar_id='$kar_id' AND abs_tgl_masuk='$abs_tgl_masuk' ORDER BY abs_id";
-        $query = $this->db->query($sql)->result_array();
-        
-        return $query;
-	}
 }
 
 

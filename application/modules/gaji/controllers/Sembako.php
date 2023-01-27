@@ -127,7 +127,7 @@ class Sembako extends CI_Controller
 
         $data_kar = $this->db->query('select d.kar_dtl_tgl_joi,d.kar_dtl_sts_nkh,k.kar_nm, k.kar_nik,k.kar_id,k.kar_nm,DATE_ADD(d.kar_dtl_tgl_joi, INTERVAL "3" MONTH) as waktu,CURDATE() from kar_master as k
         inner join kar_detail as d on k.kar_id = d.kar_id where  kar_dtl_typ_krj != "Resign" 
-        and DATE_ADD(d.kar_dtl_tgl_joi, INTERVAL "3" MONTH) <=  CURDATE()  order by k.ktr_id asc')->result();
+        and DATE_ADD(d.kar_dtl_tgl_joi, INTERVAL "3" MONTH) <=  "2022-09-31"  order by k.ktr_id asc')->result();
 
 
         foreach ($data_kar as $k) {
@@ -148,8 +148,10 @@ class Sembako extends CI_Controller
                 and $k->kar_nik != 'SG.0667.2022' and $k->kar_nik != 'SG.0668.2022'
 
                 and $k->kar_nik != 'SG.0663.2022' and $k->kar_nik != 'SG.0688.2022'
-                and $k->kar_nik != 'SG.0689.2022'
+                and $k->kar_nik != 'SG.0689.2022' and $k->kar_nik != 'SG.0011.2003'
 
+                and $k->kar_nik != 'SG.0634.2021'
+ 
 
             )) {
 
@@ -178,7 +180,8 @@ class Sembako extends CI_Controller
                 'kar_id' => $k->kar_id,
                 'kar_nik' => $k->kar_nik,
                 'kar_nm' => $k->kar_nm,
-                'bulan' => date('m-Y'),
+                // 'bulan' => date('m-Y'),
+                'bulan' => '09-2022',
                 'harga' => $harga,
                 'crdt' => date('Y-m-d H:i:s'),
                 'status_menikah' => $k->kar_dtl_sts_nkh,

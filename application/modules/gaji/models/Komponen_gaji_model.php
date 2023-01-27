@@ -37,7 +37,7 @@ class Komponen_gaji_model extends CI_Model
 
         $this->db->where('kar_detail.kar_dtl_typ_krj !=','Resign');
 
-         $this->db->where('kar_master.kar_id','433');
+        // $this->db->where('kar_master.kar_id','433');
 
 
 

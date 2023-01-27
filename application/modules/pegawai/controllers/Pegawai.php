@@ -7,10 +7,10 @@ class Pegawai extends CI_Controller {
 	function __construct(){
 		parent::__construct();
 		$sess = $this->session->userdata();
-		// if(!$sess['pegawai']['kar_pvl']=='U'){
-		// 	redirect('auth');
-		// }
-        // $this->load->model(array('auth/Auth_model','Pegawai_model'));
+		if(!$sess['pegawai']['kar_pvl']=='U'){
+			redirect('auth');
+		}
+        $this->load->model(array('auth/Auth_model','Pegawai_model'));
 		
     }
 
@@ -26,19 +26,34 @@ class Pegawai extends CI_Controller {
 		$keyword = $this->input->post('search');
 		$post 	 = $this->input->post();
 
-		$data['title'] 			= 'Document';
-		$data['search'] 		= $keyword;
-		$data['search_box'] 	= true;
-		$data['active_menu'] 	= 'list_kategori';
-		$data['action'] 		= base_url('document/index');
-		$data['css'] 			= array(
-			'plugins/datepicker/datepicker3.css',
-			'plugins/sweet-alert/sweetalert.css'
-		); // css tambahan
-		$data['js']				= array(
-			'plugins/sweet-alert/sweetalert.min.js',
-			'plugins/datepicker/bootstrap-datepicker.js'
-		); // js tambahan
+		$data['kar_masuk'] = $this->Pegawai_model->karyawan_masuk_tahun();
+		$data['kar_keluar'] = $this->Pegawai_model->karyawan_keluar_tahun();
+		$data['fasilitas_dapat'] = $this->Pegawai_model->fasilitas_dapat();
+		$data['fasilitas_tidak_dapat'] = $this->Pegawai_model->fasilitas_tidak_dapat();
+
+		$data['jumlah_karyawan_aktif'] = $this->Pegawai_model->jumlah_karyawan_aktif();
+
+		$data['status_kar'] = $this->Pegawai_model->status_kar();
+
+		
+
+		
+
+		
+
+		
+
+		// echo "<pre>";
+		// print_r($data['kar_masuk']);
+
+		// die;
+
+		// foreach($data['kar_masuk'] as $k){
+		// 	echo $k->TOTAL.',';
+		// }
+
+		
+		// die;
 
 
 		

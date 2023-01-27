@@ -53,7 +53,7 @@ class Kantor extends CI_Controller
             $row[] = $data_Kantor->ktr_long;
             $row[] = $data_Kantor->ktr_radius;
            
-            $row[] = "";
+           	    $row[] = "";
 
             $data[] = $row;
         }
